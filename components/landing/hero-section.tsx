@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -9,8 +10,9 @@ import { Shield, Code, Lock, Zap, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export function HeroSection() {
+  const { t } = useTranslation();
   const [typedText, setTypedText] = useState('');
-  const fullText = 'Master cybersecurity through interactive challenges';
+  const fullText = t('hero.subtitle');
   const typingSpeed = 50;
   
   useEffect(() => {
@@ -26,7 +28,7 @@ export function HeroSection() {
     }, typingSpeed);
     
     return () => clearInterval(typingInterval);
-  }, []);
+  }, [fullText]);
 
   return (
     <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
@@ -34,11 +36,11 @@ export function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <Badge className="px-3 py-1 bg-purple-500/10 text-purple-400 border-purple-500/20 mb-2">
-              <Zap className="mr-1 h-3 w-3" /> Launch Promotion: 25% Off for Early Access
+              <Zap className="mr-1 h-3 w-3" /> {t('hero.promotion')}
             </Badge>
             
             <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold leading-tight">
-              KaliumLabs: Your <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-400">Cybersecurity</span> Playground
+              {t('hero.title')}
             </h1>
             
             <div className="h-12">
@@ -51,30 +53,14 @@ export function HeroSection() {
             <div className="flex flex-wrap gap-4">
               <Link href="/register">
                 <Button size="lg" className="bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white">
-                  Get Started <ChevronRight className="ml-1 h-4 w-4" />
+                  {t('hero.getStarted')} <ChevronRight className="ml-1 h-4 w-4" />
                 </Button>
               </Link>
               <Link href="/demo">
                 <Button size="lg" variant="outline" className="border-purple-500/50 hover:border-purple-500 hover:bg-purple-500/10">
-                  Try Demo
+                  {t('hero.tryDemo')}
                 </Button>
               </Link>
-            </div>
-            
-            <div className="pt-4 flex items-center space-x-2 text-sm">
-              <div className="flex -space-x-2">
-                {[...Array(5)].map((_, i) => (
-                  <div key={i} className={cn(
-                    "w-8 h-8 rounded-full border-2 border-background",
-                    i % 2 ? "bg-blue-500" : "bg-purple-500"
-                  )}>
-                    <span className="sr-only">User</span>
-                  </div>
-                ))}
-              </div>
-              <p className="text-muted-foreground">
-                <span className="font-semibold text-foreground">1,200+</span> security enthusiasts joined this month
-              </p>
             </div>
           </div>
           

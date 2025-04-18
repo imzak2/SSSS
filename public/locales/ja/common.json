@@ -1,0 +1,16 @@
+{
+  "hero": {
+    "promotion": "ローンチ記念: アーリーアクセス25%オフ",
+    "title": "KaliumLabs: あなたのサイバーセキュリティ練習場",
+    "subtitle": "インタラクティブな課題を通じてサイバーセキュリティをマスター",
+    "getStarted": "始める",
+    "tryDemo": "デモを試す"
+  },
+  "nav": {
+    "features": "機能",
+    "curriculum": "カリキュラム",
+    "pricing": "料金",
+    "login": "ログイン",
+    "signup": "サインアップ"
+  }
+}

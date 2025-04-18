@@ -1,0 +1,16 @@
+{
+  "hero": {
+    "promotion": "Promoción de lanzamiento: 25% de descuento para acceso anticipado",
+    "title": "KaliumLabs: Tu campo de entrenamiento en ciberseguridad",
+    "subtitle": "Domina la ciberseguridad a través de desafíos interactivos",
+    "getStarted": "Comenzar",
+    "tryDemo": "Probar Demo"
+  },
+  "nav": {
+    "features": "Características",
+    "curriculum": "Plan de estudios",
+    "pricing": "Precios",
+    "login": "Iniciar sesión",
+    "signup": "Registrarse"
+  }
+}

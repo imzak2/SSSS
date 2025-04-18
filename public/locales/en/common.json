@@ -1,0 +1,16 @@
+{
+  "hero": {
+    "promotion": "Launch Promotion: 25% Off for Early Access",
+    "title": "KaliumLabs: Your Cybersecurity Playground",
+    "subtitle": "Master cybersecurity through interactive challenges",
+    "getStarted": "Get Started",
+    "tryDemo": "Try Demo"
+  },
+  "nav": {
+    "features": "Features",
+    "curriculum": "Curriculum",
+    "pricing": "Pricing",
+    "login": "Login",
+    "signup": "Sign Up"
+  }
+}

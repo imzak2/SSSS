@@ -1,14 +1,17 @@
 "use client"
 
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Menu, X, Terminal, Zap } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { LanguageToggle } from '@/components/language-toggle';
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,36 +44,40 @@ export function Navbar() {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
           <Link href="#features" className="text-foreground/80 hover:text-purple-400 transition">
-            Features
+            {t('nav.features')}
           </Link>
           <Link href="#curriculum" className="text-foreground/80 hover:text-purple-400 transition">
-            Curriculum
+            {t('nav.curriculum')}
           </Link>
           <Link href="#pricing" className="text-foreground/80 hover:text-purple-400 transition">
-            Pricing
+            {t('nav.pricing')}
           </Link>
         </nav>
 
         <div className="hidden md:flex items-center space-x-4">
+          <LanguageToggle />
           <Link href="/login">
             <Button variant="outline" className="border-purple-500/50 hover:border-purple-500 hover:bg-purple-500/10">
-              Login
+              {t('nav.login')}
             </Button>
           </Link>
           <Link href="/register">
             <Button className="bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white">
-              Sign Up <Zap className="ml-2 h-4 w-4" />
+              {t('nav.signup')} <Zap className="ml-2 h-4 w-4" />
             </Button>
           </Link>
         </div>
 
         {/* Mobile Menu Button */}
-        <button
-          className="md:hidden text-foreground p-2"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        <div className="md:hidden flex items-center space-x-4">
+          <LanguageToggle />
+          <button
+            className="text-foreground p-2"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -82,31 +89,31 @@ export function Navbar() {
               className="text-foreground/80 hover:text-purple-400 transition py-2"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Features
+              {t('nav.features')}
             </Link>
             <Link 
               href="#curriculum" 
               className="text-foreground/80 hover:text-purple-400 transition py-2"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Curriculum
+              {t('nav.curriculum')}
             </Link>
             <Link 
               href="#pricing" 
               className="text-foreground/80 hover:text-purple-400 transition py-2"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Pricing
+              {t('nav.pricing')}
             </Link>
             <div className="flex flex-col space-y-3 pt-3 border-t border-border">
               <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>
                 <Button variant="outline" className="w-full border-purple-500/50 hover:border-purple-500 hover:bg-purple-500/10">
-                  Login
+                  {t('nav.login')}
                 </Button>
               </Link>
               <Link href="/register" onClick={() => setIsMobileMenuOpen(false)}>
                 <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white">
-                  Sign Up <Zap className="ml-2 h-4 w-4" />
+                  {t('nav.signup')} <Zap className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
             </div>
