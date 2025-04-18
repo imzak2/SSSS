@@ -12,5 +12,145 @@
     "pricing": "Precios",
     "login": "Iniciar sesión",
     "signup": "Registrarse"
+  },
+  "auth": {
+    "backToHome": "Volver al inicio",
+    "login": {
+      "title": "Bienvenido de nuevo",
+      "description": "Ingresa tus credenciales para acceder a tu cuenta",
+      "email": "Correo electrónico",
+      "emailPlaceholder": "nombre@ejemplo.com",
+      "password": "Contraseña",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "signIn": "Iniciar sesión",
+      "loggingIn": "Iniciando sesión...",
+      "orContinueWith": "O CONTINUAR CON",
+      "noAccount": "¿No tienes una cuenta?",
+      "signUp": "Regístrate"
+    },
+    "register": {
+      "title": "Crear una cuenta",
+      "description": "Ingresa tu información para comenzar",
+      "fullName": "Nombre completo",
+      "namePlaceholder": "Juan Pérez",
+      "email": "Correo electrónico",
+      "emailPlaceholder": "nombre@ejemplo.com",
+      "password": "Contraseña",
+      "creatingAccount": "Creando cuenta...",
+      "createAccount": "Crear cuenta",
+      "orContinueWith": "O CONTINUAR CON",
+      "haveAccount": "¿Ya tienes una cuenta?",
+      "signIn": "Iniciar sesión",
+      "passwordStrength": {
+        "weak": "Débil",
+        "fair": "Regular",
+        "good": "Buena",
+        "strong": "Fuerte",
+        "characters": "8+ caracteres",
+        "uppercase": "Letra mayúscula",
+        "number": "Número",
+        "special": "Carácter especial"
+      }
+    }
+  },
+  "features": {
+    "title": "Un Ecosistema Completo de Ciberseguridad",
+    "description": "KaliumLabs te proporciona todo lo que necesitas para dominar las habilidades de ciberseguridad a través del aprendizaje práctico y un sistema de progresión gamificado.",
+    "items": {
+      "challenges": {
+        "title": "Desafíos Interactivos",
+        "description": "Laboratorios prácticos de pentesting con escenarios y vulnerabilidades del mundo real para explotar."
+      },
+      "progression": {
+        "title": "Sistema de Progresión",
+        "description": "Gana rangos, insignias y desbloquea desafíos avanzados mientras mejoras tus habilidades."
+      },
+      "community": {
+        "title": "Aprendizaje Comunitario",
+        "description": "Colabora con compañeros, comparte soluciones y aprende de la comunidad."
+      },
+      "analytics": {
+        "title": "Análisis en Tiempo Real",
+        "description": "Rastrea tu progreso, identifica áreas de mejora y visualiza tu crecimiento."
+      },
+      "disciplines": {
+        "title": "Múltiples Disciplinas",
+        "description": "Domina pentesting, criptografía, programación y más en una sola plataforma."
+      },
+      "paths": {
+        "title": "Rutas de Aprendizaje Guiadas",
+        "description": "Sigue rutas estructuradas desde lo básico hasta técnicas avanzadas para un aprendizaje eficiente."
+      }
+    }
+  },
+  "curriculum": {
+    "title": "Rutas de Aprendizaje Especializadas",
+    "description": "Nuestro plan de estudios cubre todas las áreas principales de ciberseguridad con desafíos prácticos diseñados por profesionales de la industria.",
+    "categories": {
+      "pentesting": {
+        "title": "Pentesting Web",
+        "items": [
+          "Ataques XSS",
+          "Inyección SQL",
+          "CSRF",
+          "Bypass de Autenticación",
+          "Inclusión de Archivos"
+        ]
+      },
+      "programming": {
+        "title": "Programación",
+        "items": [
+          "Código Seguro",
+          "Desarrollo de Exploits",
+          "Automatización",
+          "Ingeniería Inversa",
+          "Scripting"
+        ]
+      },
+      "cryptography": {
+        "title": "Criptografía",
+        "items": [
+          "Encriptación",
+          "Hashing",
+          "Intercambio de Claves",
+          "Firmas Digitales",
+          "Criptoanálisis"
+        ]
+      }
+    },
+    "viewChallenges": "Ver Desafíos"
+  },
+  "footer": {
+    "description": "La plataforma interactiva de aprendizaje de ciberseguridad enfocada en habilidades prácticas y progresión gamificada.",
+    "sections": {
+      "product": {
+        "title": "Producto",
+        "items": {
+          "features": "Características",
+          "curriculum": "Plan de estudios",
+          "pricing": "Precios"
+        }
+      },
+      "resources": {
+        "title": "Recursos",
+        "items": {
+          "documentation": "Documentación",
+          "blog": "Blog",
+          "community": "Comunidad",
+          "learningPaths": "Rutas de Aprendizaje"
+        }
+      },
+      "company": {
+        "title": "Empresa",
+        "items": {
+          "about": "Acerca de",
+          "careers": "Carreras",
+          "contact": "Contacto",
+          "privacy": "Política de Privacidad"
+        }
+      }
+    },
+    "copyright": "© {{year}} KaliumLabs. Todos los derechos reservados.",
+    "builtWith": "Construido con ❤️ por entusiastas de la ciberseguridad"
   }
 }

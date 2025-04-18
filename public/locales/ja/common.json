@@ -12,5 +12,145 @@
     "pricing": "料金",
     "login": "ログイン",
     "signup": "サインアップ"
+  },
+  "auth": {
+    "backToHome": "ホームに戻る",
+    "login": {
+      "title": "おかえりなさい",
+      "description": "アカウントにアクセスするには認証情報を入力してください",
+      "email": "メールアドレス",
+      "emailPlaceholder": "name@example.com",
+      "password": "パスワード",
+      "forgotPassword": "パスワードをお忘れですか？",
+      "signIn": "サインイン",
+      "loggingIn": "ログイン中...",
+      "orContinueWith": "または次で続ける",
+      "noAccount": "アカウントをお持ちでない方",
+      "signUp": "サインアップ"
+    },
+    "register": {
+      "title": "アカウントを作成",
+      "description": "始めるには情報を入力してください",
+      "fullName": "氏名",
+      "namePlaceholder": "山田太郎",
+      "email": "メールアドレス",
+      "emailPlaceholder": "name@example.com",
+      "password": "パスワード",
+      "creatingAccount": "アカウント作成中...",
+      "createAccount": "アカウントを作成",
+      "orContinueWith": "または次で続ける",
+      "haveAccount": "すでにアカウントをお持ちの方",
+      "signIn": "サインイン",
+      "passwordStrength": {
+        "weak": "弱い",
+        "fair": "普通",
+        "good": "良い",
+        "strong": "強い",
+        "characters": "8文字以上",
+        "uppercase": "大文字",
+        "number": "数字",
+        "special": "特殊文字"
+      }
+    }
+  },
+  "features": {
+    "title": "完全なサイバーセキュリティエコシステム",
+    "description": "KaliumLabsは、実践的な学習とゲーム化された進行システムを通じて、サイバーセキュリティスキルを習得するために必要なすべてを提供します。",
+    "items": {
+      "challenges": {
+        "title": "インタラクティブな課題",
+        "description": "実際のシナリオと脆弱性を利用する実践的なペネトレーションテストラボ。"
+      },
+      "progression": {
+        "title": "進行システム",
+        "description": "スキルを向上させながら、ランクやバッジを獲得し、高度な課題をアンロック。"
+      },
+      "community": {
+        "title": "コミュニティ学習",
+        "description": "仲間と協力し、解決策を共有し、コミュニティから学ぶ。"
+      },
+      "analytics": {
+        "title": "リアルタイム分析",
+        "description": "進捗を追跡し、改善が必要な分野を特定し、成長を可視化。"
+      },
+      "disciplines": {
+        "title": "複数の専門分野",
+        "description": "ペネトレーションテスト、暗号化、プログラミングなどを1つのプラットフォームでマスター。"
+      },
+      "paths": {
+        "title": "ガイド付き学習パス",
+        "description": "効率的な学習のために、基礎から高度なテクニックまでの構造化されたパスに従う。"
+      }
+    }
+  },
+  "curriculum": {
+    "title": "専門的な学習パス",
+    "description": "業界のプロフェッショナルによって設計された実践的な課題で、サイバーセキュリティの主要分野をすべてカバーするカリキュラム。",
+    "categories": {
+      "pentesting": {
+        "title": "Webペネトレーションテスト",
+        "items": [
+          "XSS攻撃",
+          "SQLインジェクション",
+          "CSRF",
+          "認証バイパス",
+          "ファイルインクルージョン"
+        ]
+      },
+      "programming": {
+        "title": "プログラミング",
+        "items": [
+          "セキュアコーディング",
+          "エクスプロイト開発",
+          "自動化",
+          "リバースエンジニアリング",
+          "スクリプティング"
+        ]
+      },
+      "cryptography": {
+        "title": "暗号化",
+        "items": [
+          "暗号化",
+          "ハッシュ化",
+          "鍵交換",
+          "デジタル署名",
+          "暗号解析"
+        ]
+      }
+    },
+    "viewChallenges": "課題を見る"
+  },
+  "footer": {
+    "description": "実践的なスキルとゲーム化された進行に焦点を当てたインタラクティブなサイバーセキュリティ学習プラットフォーム。",
+    "sections": {
+      "product": {
+        "title": "製品",
+        "items": {
+          "features": "機能",
+          "curriculum": "カリキュラム",
+          "pricing": "料金"
+        }
+      },
+      "resources": {
+        "title": "リソース",
+        "items": {
+          "documentation": "ドキュメント",
+          "blog": "ブログ",
+          "community": "コミュニティ",
+          "learningPaths": "学習パス"
+        }
+      },
+      "company": {
+        "title": "会社",
+        "items": {
+          "about": "会社概要",
+          "careers": "採用情報",
+          "contact": "お問い合わせ",
+          "privacy": "プライバシーポリシー"
+        }
+      }
+    },
+    "copyright": "© {{year}} KaliumLabs. All rights reserved.",
+    "builtWith": "サイバーセキュリティ愛好家によって❤️で作られました"
   }
 }

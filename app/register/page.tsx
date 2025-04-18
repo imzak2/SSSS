@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -10,6 +11,7 @@ import { Terminal, Eye, EyeOff, ArrowLeft, User, Mail, Lock, CheckCircle2 } from
 import { motion } from 'framer-motion';
 
 export default function RegisterPage() {
+  const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -37,7 +39,12 @@ export default function RegisterPage() {
     if (/[0-9]/.test(password)) strength += 1;
     if (/[^A-Za-z0-9]/.test(password)) strength += 1;
     
-    const labels = ['Weak', 'Fair', 'Good', 'Strong'];
+    const labels = [
+      t('auth.register.passwordStrength.weak'),
+      t('auth.register.passwordStrength.fair'),
+      t('auth.register.passwordStrength.good'),
+      t('auth.register.passwordStrength.strong')
+    ];
     const colors = ['bg-red-500', 'bg-yellow-500', 'bg-blue-500', 'bg-green-500'];
     
     return { 
@@ -51,14 +58,13 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-background relative overflow-hidden">
-      {/* Animated background elements */}
       <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/circuit-pattern.png')] bg-repeat opacity-10 z-0"></div>
       <div className="fixed top-20 -left-28 w-96 h-96 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 blur-3xl"></div>
       <div className="fixed top-1/2 -right-28 w-96 h-96 rounded-full bg-gradient-to-r from-green-500/20 to-blue-500/20 blur-3xl"></div>
       
       <Link href="/" className="absolute top-8 left-8 flex items-center space-x-2 text-muted-foreground hover:text-foreground transition z-10">
         <ArrowLeft className="h-4 w-4" />
-        <span>Back to Home</span>
+        <span>{t('auth.backToHome')}</span>
       </Link>
       
       <div className="relative w-full max-w-md z-10">
@@ -74,20 +80,20 @@ export default function RegisterPage() {
                   <Terminal className="h-6 w-6 text-purple-500" />
                 </div>
               </div>
-              <CardTitle className="text-2xl">Create an account</CardTitle>
-              <CardDescription>Enter your information to get started</CardDescription>
+              <CardTitle className="text-2xl">{t('auth.register.title')}</CardTitle>
+              <CardDescription>{t('auth.register.description')}</CardDescription>
             </CardHeader>
             
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="name">Full Name</Label>
+                  <Label htmlFor="name">{t('auth.register.fullName')}</Label>
                   <div className="relative">
                     <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                     <Input
                       id="name"
                       type="text"
-                      placeholder="John Doe"
+                      placeholder={t('auth.register.namePlaceholder')}
                       className="pl-10"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
@@ -97,13 +103,13 @@ export default function RegisterPage() {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email">{t('auth.register.email')}</Label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                     <Input
                       id="email"
                       type="email"
-                      placeholder="name@example.com"
+                      placeholder={t('auth.register.emailPlaceholder')}
                       className="pl-10"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -113,7 +119,7 @@ export default function RegisterPage() {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password">{t('auth.register.password')}</Label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                     <Input
@@ -137,7 +143,9 @@ export default function RegisterPage() {
                     <div className="mt-2">
                       <div className="flex items-center justify-between mb-1">
                         <div className="text-xs">{passwordStrength.label}</div>
-                        <div className="text-xs">{password.length >= 8 ? '8+ characters' : `${password.length}/8 characters`}</div>
+                        <div className="text-xs">
+                          {password.length >= 8 ? t('auth.register.passwordStrength.characters') : `${password.length}/8 ${t('auth.register.passwordStrength.characters')}`}
+                        </div>
                       </div>
                       <div className="w-full h-1 bg-border rounded-full overflow-hidden">
                         <div 
@@ -149,19 +157,27 @@ export default function RegisterPage() {
                       <div className="grid grid-cols-2 gap-2 mt-3">
                         <div className="flex items-center text-xs space-x-1">
                           <CheckCircle2 className={`h-3 w-3 ${/[A-Z]/.test(password) ? 'text-green-500' : 'text-muted-foreground'}`} />
-                          <span className={/[A-Z]/.test(password) ? 'text-foreground' : 'text-muted-foreground'}>Uppercase letter</span>
+                          <span className={/[A-Z]/.test(password) ? 'text-foreground' : 'text-muted-foreground'}>
+                            {t('auth.register.passwordStrength.uppercase')}
+                          </span>
                         </div>
                         <div className="flex items-center text-xs space-x-1">
                           <CheckCircle2 className={`h-3 w-3 ${/[0-9]/.test(password) ? 'text-green-500' : 'text-muted-foreground'}`} />
-                          <span className={/[0-9]/.test(password) ? 'text-foreground' : 'text-muted-foreground'}>Number</span>
+                          <span className={/[0-9]/.test(password) ? 'text-foreground' : 'text-muted-foreground'}>
+                            {t('auth.register.passwordStrength.number')}
+                          </span>
                         </div>
                         <div className="flex items-center text-xs space-x-1">
                           <CheckCircle2 className={`h-3 w-3 ${password.length >= 8 ? 'text-green-500' : 'text-muted-foreground'}`} />
-                          <span className={password.length >= 8 ? 'text-foreground' : 'text-muted-foreground'}>8+ characters</span>
+                          <span className={password.length >= 8 ? 'text-foreground' : 'text-muted-foreground'}>
+                            {t('auth.register.passwordStrength.characters')}
+                          </span>
                         </div>
                         <div className="flex items-center text-xs space-x-1">
                           <CheckCircle2 className={`h-3 w-3 ${/[^A-Za-z0-9]/.test(password) ? 'text-green-500' : 'text-muted-foreground'}`} />
-                          <span className={/[^A-Za-z0-9]/.test(password) ? 'text-foreground' : 'text-muted-foreground'}>Special character</span>
+                          <span className={/[^A-Za-z0-9]/.test(password) ? 'text-foreground' : 'text-muted-foreground'}>
+                            {t('auth.register.passwordStrength.special')}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -176,10 +192,10 @@ export default function RegisterPage() {
                   {isLoading ? (
                     <div className="flex items-center">
                       <div className="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin mr-2"></div>
-                      Creating account...
+                      {t('auth.register.creatingAccount')}
                     </div>
                   ) : (
-                    "Create account"
+                    t('auth.register.createAccount')
                   )}
                 </Button>
               </form>
@@ -191,7 +207,7 @@ export default function RegisterPage() {
                   <div className="w-full border-t border-border"></div>
                 </div>
                 <div className="relative bg-background px-4 text-xs text-muted-foreground">
-                  OR CONTINUE WITH
+                  {t('auth.register.orContinueWith')}
                 </div>
               </div>
               
@@ -211,9 +227,9 @@ export default function RegisterPage() {
               </div>
               
               <div className="text-center text-sm">
-                Already have an account?{' '}
+                {t('auth.register.haveAccount')}{' '}
                 <Link href="/login" className="text-purple-400 hover:text-purple-500 font-medium">
-                  Sign in
+                  {t('auth.register.signIn')}
                 </Link>
               </div>
             </CardFooter>

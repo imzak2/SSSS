@@ -1,27 +1,31 @@
+"use client"
+
+import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 import { Terminal, Github, Twitter, Linkedin, Heart } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 
 export function Footer() {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
   
   const links = {
     product: [
-      { name: 'Features', href: '#features' },
-      { name: 'Curriculum', href: '#curriculum' },
-      { name: 'Pricing', href: '#pricing' },
+      { name: t('footer.sections.product.items.features'), href: '#features' },
+      { name: t('footer.sections.product.items.curriculum'), href: '#curriculum' },
+      { name: t('footer.sections.product.items.pricing'), href: '#pricing' },
     ],
     resources: [
-      { name: 'Documentation', href: '#' },
-      { name: 'Blog', href: '#' },
-      { name: 'Community', href: '#' },
-      { name: 'Learning Paths', href: '#' },
+      { name: t('footer.sections.resources.items.documentation'), href: '#' },
+      { name: t('footer.sections.resources.items.blog'), href: '#' },
+      { name: t('footer.sections.resources.items.community'), href: '#' },
+      { name: t('footer.sections.resources.items.learningPaths'), href: '#' },
     ],
     company: [
-      { name: 'About', href: '#' },
-      { name: 'Careers', href: '#' },
-      { name: 'Contact', href: '#' },
-      { name: 'Privacy Policy', href: '#' },
+      { name: t('footer.sections.company.items.about'), href: '#' },
+      { name: t('footer.sections.company.items.careers'), href: '#' },
+      { name: t('footer.sections.company.items.contact'), href: '#' },
+      { name: t('footer.sections.company.items.privacy'), href: '#' },
     ],
   };
 
@@ -37,7 +41,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-muted-foreground mb-4">
-              The interactive cybersecurity learning platform with a focus on practical skills and gamified progression.
+              {t('footer.description')}
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-muted-foreground hover:text-purple-400 transition">
@@ -56,7 +60,7 @@ export function Footer() {
           </div>
           
           <div>
-            <h3 className="font-semibold mb-3">Product</h3>
+            <h3 className="font-semibold mb-3">{t('footer.sections.product.title')}</h3>
             <ul className="space-y-2">
               {links.product.map((link, index) => (
                 <li key={index}>
@@ -72,7 +76,7 @@ export function Footer() {
           </div>
           
           <div>
-            <h3 className="font-semibold mb-3">Resources</h3>
+            <h3 className="font-semibold mb-3">{t('footer.sections.resources.title')}</h3>
             <ul className="space-y-2">
               {links.resources.map((link, index) => (
                 <li key={index}>
@@ -88,7 +92,7 @@ export function Footer() {
           </div>
           
           <div>
-            <h3 className="font-semibold mb-3">Company</h3>
+            <h3 className="font-semibold mb-3">{t('footer.sections.company.title')}</h3>
             <ul className="space-y-2">
               {links.company.map((link, index) => (
                 <li key={index}>
@@ -108,10 +112,10 @@ export function Footer() {
         
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground">
-            &copy; {currentYear} KaliumLabs. All rights reserved.
+            {t('footer.copyright', { year: currentYear })}
           </p>
           <p className="text-sm text-muted-foreground mt-2 md:mt-0">
-            Built with <Heart className="inline-block h-3 w-3 text-red-500" /> by cybersecurity enthusiasts
+            {t('footer.builtWith')}
           </p>
         </div>
       </div>

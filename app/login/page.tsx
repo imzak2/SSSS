@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -10,6 +11,7 @@ import { Terminal, Eye, EyeOff, ArrowLeft, Lock, Mail } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function LoginPage() {
+  const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,14 +29,13 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-background relative overflow-hidden">
-      {/* Animated background elements */}
       <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/circuit-pattern.png')] bg-repeat opacity-10 z-0"></div>
       <div className="fixed top-20 -left-28 w-96 h-96 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 blur-3xl"></div>
       <div className="fixed top-1/2 -right-28 w-96 h-96 rounded-full bg-gradient-to-r from-green-500/20 to-blue-500/20 blur-3xl"></div>
       
       <Link href="/" className="absolute top-8 left-8 flex items-center space-x-2 text-muted-foreground hover:text-foreground transition z-10">
         <ArrowLeft className="h-4 w-4" />
-        <span>Back to Home</span>
+        <span>{t('auth.backToHome')}</span>
       </Link>
       
       <div className="relative w-full max-w-md z-10">
@@ -50,20 +51,20 @@ export default function LoginPage() {
                   <Terminal className="h-6 w-6 text-purple-500" />
                 </div>
               </div>
-              <CardTitle className="text-2xl">Welcome back</CardTitle>
-              <CardDescription>Enter your credentials to access your account</CardDescription>
+              <CardTitle className="text-2xl">{t('auth.login.title')}</CardTitle>
+              <CardDescription>{t('auth.login.description')}</CardDescription>
             </CardHeader>
             
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email">{t('auth.login.email')}</Label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                     <Input
                       id="email"
                       type="email"
-                      placeholder="name@example.com"
+                      placeholder={t('auth.login.emailPlaceholder')}
                       className="pl-10"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -74,12 +75,12 @@ export default function LoginPage() {
                 
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="password">{t('auth.login.password')}</Label>
                     <Link 
                       href="/forgot-password"
                       className="text-sm text-muted-foreground hover:text-purple-400 transition"
                     >
-                      Forgot password?
+                      {t('auth.login.forgotPassword')}
                     </Link>
                   </div>
                   <div className="relative">
@@ -110,10 +111,10 @@ export default function LoginPage() {
                   {isLoading ? (
                     <div className="flex items-center">
                       <div className="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin mr-2"></div>
-                      Logging in...
+                      {t('auth.login.loggingIn')}
                     </div>
                   ) : (
-                    "Sign in"
+                    t('auth.login.signIn')
                   )}
                 </Button>
               </form>
@@ -125,7 +126,7 @@ export default function LoginPage() {
                   <div className="w-full border-t border-border"></div>
                 </div>
                 <div className="relative bg-background px-4 text-xs text-muted-foreground">
-                  OR CONTINUE WITH
+                  {t('auth.login.orContinueWith')}
                 </div>
               </div>
               
@@ -145,9 +146,9 @@ export default function LoginPage() {
               </div>
               
               <div className="text-center text-sm">
-                Don't have an account?{' '}
+                {t('auth.login.noAccount')}{' '}
                 <Link href="/register" className="text-purple-400 hover:text-purple-500 font-medium">
-                  Sign up
+                  {t('auth.login.signUp')}
                 </Link>
               </div>
             </CardFooter>

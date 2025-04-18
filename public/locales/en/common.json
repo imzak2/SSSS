@@ -12,5 +12,145 @@
     "pricing": "Pricing",
     "login": "Login",
     "signup": "Sign Up"
+  },
+  "auth": {
+    "backToHome": "Back to Home",
+    "login": {
+      "title": "Welcome back",
+      "description": "Enter your credentials to access your account",
+      "email": "Email",
+      "emailPlaceholder": "name@example.com",
+      "password": "Password",
+      "forgotPassword": "Forgot password?",
+      "signIn": "Sign in",
+      "loggingIn": "Logging in...",
+      "orContinueWith": "OR CONTINUE WITH",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up"
+    },
+    "register": {
+      "title": "Create an account",
+      "description": "Enter your information to get started",
+      "fullName": "Full Name",
+      "namePlaceholder": "John Doe",
+      "email": "Email",
+      "emailPlaceholder": "name@example.com",
+      "password": "Password",
+      "creatingAccount": "Creating account...",
+      "createAccount": "Create account",
+      "orContinueWith": "OR CONTINUE WITH",
+      "haveAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "passwordStrength": {
+        "weak": "Weak",
+        "fair": "Fair",
+        "good": "Good",
+        "strong": "Strong",
+        "characters": "8+ characters",
+        "uppercase": "Uppercase letter",
+        "number": "Number",
+        "special": "Special character"
+      }
+    }
+  },
+  "features": {
+    "title": "A Complete Cybersecurity Ecosystem",
+    "description": "KaliumLabs provides everything you need to master cybersecurity skills through practical, hands-on learning and a gamified progression system.",
+    "items": {
+      "challenges": {
+        "title": "Interactive Challenges",
+        "description": "Hands-on pentesting labs with real-world scenarios and vulnerabilities to exploit."
+      },
+      "progression": {
+        "title": "Progression System",
+        "description": "Earn ranks, badges, and unlock advanced challenges as you improve your skills."
+      },
+      "community": {
+        "title": "Community Learning",
+        "description": "Collaborate with peers, share solutions, and learn from the community."
+      },
+      "analytics": {
+        "title": "Real-time Analytics",
+        "description": "Track your progress, identify areas of improvement, and visualize your growth."
+      },
+      "disciplines": {
+        "title": "Multiple Disciplines",
+        "description": "Master pentesting, cryptography, programming, and more in one platform."
+      },
+      "paths": {
+        "title": "Guided Learning Paths",
+        "description": "Follow structured paths from basics to advanced techniques for efficient learning."
+      }
+    }
+  },
+  "curriculum": {
+    "title": "Specialized Learning Paths",
+    "description": "Our curriculum covers all the major areas of cybersecurity with hands-on challenges designed by industry professionals.",
+    "categories": {
+      "pentesting": {
+        "title": "Pentesting Web",
+        "items": [
+          "XSS Attacks",
+          "SQL Injection",
+          "CSRF",
+          "Authentication Bypass",
+          "File Inclusion"
+        ]
+      },
+      "programming": {
+        "title": "Programming",
+        "items": [
+          "Secure Coding",
+          "Exploit Development",
+          "Automation",
+          "Reverse Engineering",
+          "Scripting"
+        ]
+      },
+      "cryptography": {
+        "title": "Cryptography",
+        "items": [
+          "Encryption",
+          "Hashing",
+          "Key Exchange",
+          "Digital Signatures",
+          "Cryptanalysis"
+        ]
+      }
+    },
+    "viewChallenges": "View Challenges"
+  },
+  "footer": {
+    "description": "The interactive cybersecurity learning platform with a focus on practical skills and gamified progression.",
+    "sections": {
+      "product": {
+        "title": "Product",
+        "items": {
+          "features": "Features",
+          "curriculum": "Curriculum",
+          "pricing": "Pricing"
+        }
+      },
+      "resources": {
+        "title": "Resources",
+        "items": {
+          "documentation": "Documentation",
+          "blog": "Blog",
+          "community": "Community",
+          "learningPaths": "Learning Paths"
+        }
+      },
+      "company": {
+        "title": "Company",
+        "items": {
+          "about": "About",
+          "careers": "Careers",
+          "contact": "Contact",
+          "privacy": "Privacy Policy"
+        }
+      }
+    },
+    "copyright": "© {{year}} KaliumLabs. All rights reserved.",
+    "builtWith": "Built with ❤️ by cybersecurity enthusiasts"
   }
 }

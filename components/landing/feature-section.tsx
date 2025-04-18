@@ -1,6 +1,7 @@
 "use client"
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { 
   ShieldCheck, 
@@ -22,62 +23,64 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
 export function FeatureSection() {
+  const { t } = useTranslation();
+
   const features = [
     {
       icon: <Terminal className="h-6 w-6 text-purple-400" />,
-      title: "Interactive Challenges",
-      description: "Hands-on pentesting labs with real-world scenarios and vulnerabilities to exploit.",
+      title: t('features.items.challenges.title'),
+      description: t('features.items.challenges.description'),
       color: "from-purple-500/20 to-blue-500/20"
     },
     {
       icon: <Trophy className="h-6 w-6 text-yellow-400" />,
-      title: "Progression System",
-      description: "Earn ranks, badges, and unlock advanced challenges as you improve your skills.",
+      title: t('features.items.progression.title'),
+      description: t('features.items.progression.description'),
       color: "from-yellow-500/20 to-orange-500/20"
     },
     {
       icon: <Users className="h-6 w-6 text-blue-400" />,
-      title: "Community Learning",
-      description: "Collaborate with peers, share solutions, and learn from the community.",
+      title: t('features.items.community.title'),
+      description: t('features.items.community.description'),
       color: "from-blue-500/20 to-cyan-500/20"
     },
     {
       icon: <BarChart className="h-6 w-6 text-green-400" />,
-      title: "Real-time Analytics",
-      description: "Track your progress, identify areas of improvement, and visualize your growth.",
+      title: t('features.items.analytics.title'),
+      description: t('features.items.analytics.description'),
       color: "from-green-500/20 to-emerald-500/20"
     },
     {
       icon: <Shield className="h-6 w-6 text-red-400" />,
-      title: "Multiple Disciplines",
-      description: "Master pentesting, cryptography, programming, and more in one platform.",
+      title: t('features.items.disciplines.title'),
+      description: t('features.items.disciplines.description'),
       color: "from-red-500/20 to-pink-500/20"
     },
     {
       icon: <Layers className="h-6 w-6 text-indigo-400" />,
-      title: "Guided Learning Paths",
-      description: "Follow structured paths from basics to advanced techniques for efficient learning.",
+      title: t('features.items.paths.title'),
+      description: t('features.items.paths.description'),
       color: "from-indigo-500/20 to-purple-500/20"
     }
   ];
 
   const categories = [
     { 
-      title: "Pentesting Web",
+      title: t('curriculum.categories.pentesting.title'),
       icon: <Server className="h-10 w-10 text-purple-400" />,
-      items: ["XSS Attacks", "SQL Injection", "CSRF", "Authentication Bypass", "File Inclusion"],
+      items: t('curriculum.categories.pentesting.items', { returnObjects: true }),
       color: "from-purple-500 to-blue-500"
     },
     { 
-      title: "Programming",
+      title: t('curriculum.categories.programming.title'),
       icon: <Code className="h-10 w-10 text-blue-400" />,
-      items: ["Secure Coding", "Exploit Development", "Automation", "Reverse Engineering", "Scripting"],
+      items: t('curriculum.categories.programming.items', { returnObjects: true }),
       color: "from-blue-500 to-cyan-500"
     },
     { 
-      title: "Cryptography",
+      title: t('curriculum.categories.cryptography.title'),
       icon: <Lock className="h-10 w-10 text-green-400" />,
-      items: ["Encryption", "Hashing", "Key Exchange", "Digital Signatures", "Cryptanalysis"],
+      items: t('curriculum.categories.cryptography.items', { returnObjects: true }),
       color: "from-green-500 to-emerald-500"
     }
   ];
@@ -88,13 +91,15 @@ export function FeatureSection() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge className="mb-3 px-3 py-1 bg-blue-500/10 text-blue-400 border-blue-500/20">
-              <Zap className="mr-1 h-3 w-3" /> Features
+              <Zap className="mr-1 h-3 w-3" /> {t('nav.features')}
             </Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              A Complete <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-400">Cybersecurity</span> Ecosystem
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-400">
+                {t('features.title')}
+              </span>
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              KaliumLabs provides everything you need to master cybersecurity skills through practical, hands-on learning and a gamified progression system.
+              {t('features.description')}
             </p>
           </div>
 
@@ -127,13 +132,15 @@ export function FeatureSection() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
             <Badge className="mb-3 px-3 py-1 bg-purple-500/10 text-purple-400 border-purple-500/20">
-              <Cpu className="mr-1 h-3 w-3" /> Curriculum
+              <Cpu className="mr-1 h-3 w-3" /> {t('nav.curriculum')}
             </Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Specialized <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-400">Learning Paths</span>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-400">
+                {t('curriculum.title')}
+              </span>
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Our curriculum covers all the major areas of cybersecurity with hands-on challenges designed by industry professionals.
+              {t('curriculum.description')}
             </p>
           </div>
 
@@ -150,7 +157,7 @@ export function FeatureSection() {
                   </div>
                   
                   <ul className="space-y-3 mb-6 flex-grow">
-                    {category.items.map((item, i) => (
+                    {category.items.map((item: string, i: number) => (
                       <li key={i} className="flex items-center">
                         <span className="h-1.5 w-1.5 rounded-full bg-purple-500 mr-2"></span>
                         <span>{item}</span>
@@ -159,7 +166,7 @@ export function FeatureSection() {
                   </ul>
                   
                   <Button variant="outline" className="mt-auto w-full border-purple-500/30 hover:bg-purple-500/10 hover:border-purple-500/50">
-                    View Challenges
+                    {t('curriculum.viewChallenges')}
                   </Button>
                 </div>
               </div>
