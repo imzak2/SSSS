@@ -68,19 +68,19 @@ export function FeatureSection() {
     { 
       title: t('curriculum.categories.pentesting.title'),
       icon: <Server className="h-10 w-10 text-purple-400" />,
-      items: t('curriculum.categories.pentesting.items', { returnObjects: true }),
+      items: t('curriculum.categories.pentesting.items', { returnObjects: true }) || [],
       color: "from-purple-500 to-blue-500"
     },
     { 
       title: t('curriculum.categories.programming.title'),
       icon: <Code className="h-10 w-10 text-blue-400" />,
-      items: t('curriculum.categories.programming.items', { returnObjects: true }),
+      items: t('curriculum.categories.programming.items', { returnObjects: true }) || [],
       color: "from-blue-500 to-cyan-500"
     },
     { 
       title: t('curriculum.categories.cryptography.title'),
       icon: <Lock className="h-10 w-10 text-green-400" />,
-      items: t('curriculum.categories.cryptography.items', { returnObjects: true }),
+      items: t('curriculum.categories.cryptography.items', { returnObjects: true }) || [],
       color: "from-green-500 to-emerald-500"
     }
   ];
@@ -157,7 +157,7 @@ export function FeatureSection() {
                   </div>
                   
                   <ul className="space-y-3 mb-6 flex-grow">
-                    {category.items.map((item: string, i: number) => (
+                    {(Array.isArray(category.items) ? category.items : []).map((item: string, i: number) => (
                       <li key={i} className="flex items-center">
                         <span className="h-1.5 w-1.5 rounded-full bg-purple-500 mr-2"></span>
                         <span>{item}</span>

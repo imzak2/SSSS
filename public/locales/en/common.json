@@ -120,17 +120,54 @@
     },
     "viewChallenges": "View Challenges"
   },
+  "resources": {
+    "documentation": {
+      "title": "Documentation",
+      "description": "Comprehensive documentation to help you make the most of our platform",
+      "searchPlaceholder": "Search documentation...",
+      "categories": {
+        "gettingStarted": {
+          "title": "Getting Started",
+          "articles": [
+            "Platform Overview",
+            "Quick Start Guide",
+            "Account Setup",
+            "First Challenge"
+          ]
+        },
+        "challengeGuides": {
+          "title": "Challenge Guides",
+          "articles": [
+            "Web Security Fundamentals",
+            "XSS Prevention",
+            "SQL Injection Defense",
+            "Authentication Best Practices"
+          ]
+        },
+        "apiReference": {
+          "title": "API Reference",
+          "articles": [
+            "REST API Overview",
+            "Authentication",
+            "Endpoints",
+            "Rate Limits"
+          ]
+        },
+        "resources": {
+          "title": "Resources",
+          "articles": [
+            "Best Practices",
+            "Security Guidelines",
+            "Tool Recommendations",
+            "Troubleshooting"
+          ]
+        }
+      }
+    }
+  },
   "footer": {
     "description": "The interactive cybersecurity learning platform with a focus on practical skills and gamified progression.",
     "sections": {
-      "product": {
-        "title": "Product",
-        "items": {
-          "features": "Features",
-          "curriculum": "Curriculum",
-          "pricing": "Pricing"
-        }
-      },
       "resources": {
         "title": "Resources",
         "items": {

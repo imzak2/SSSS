@@ -17,22 +17,22 @@ export default function DocumentationPage() {
     {
       title: t('resources.documentation.categories.gettingStarted.title'),
       icon: <Book className="h-6 w-6" />,
-      articles: t('resources.documentation.categories.gettingStarted.articles', { returnObjects: true })
+      articles: t('resources.documentation.categories.gettingStarted.articles', { returnObjects: true }) || []
     },
     {
       title: t('resources.documentation.categories.challengeGuides.title'),
       icon: <Terminal className="h-6 w-6" />,
-      articles: t('resources.documentation.categories.challengeGuides.articles', { returnObjects: true })
+      articles: t('resources.documentation.categories.challengeGuides.articles', { returnObjects: true }) || []
     },
     {
       title: t('resources.documentation.categories.apiReference.title'),
       icon: <Code className="h-6 w-6" />,
-      articles: t('resources.documentation.categories.apiReference.articles', { returnObjects: true })
+      articles: t('resources.documentation.categories.apiReference.articles', { returnObjects: true }) || []
     },
     {
       title: t('resources.documentation.categories.resources.title'),
       icon: <FileText className="h-6 w-6" />,
-      articles: t('resources.documentation.categories.resources.articles', { returnObjects: true })
+      articles: t('resources.documentation.categories.resources.articles', { returnObjects: true }) || []
     }
   ];
 
@@ -42,7 +42,7 @@ export default function DocumentationPage() {
       <main className="pt-24 pb-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <Badge className="mb-4">Documentation</Badge>
+            <Badge className="mb-4">{t('resources.documentation.title')}</Badge>
             <h1 className="text-4xl font-bold mb-4 break-words">{t('resources.documentation.title')}</h1>
             <p className="text-muted-foreground max-w-2xl mx-auto mb-8 break-words">
               {t('resources.documentation.description')}
@@ -74,7 +74,7 @@ export default function DocumentationPage() {
                       <h2 className="text-xl font-bold break-words">{category.title}</h2>
                     </div>
                     <ul className="space-y-3">
-                      {category.articles.map((article: string, i: number) => (
+                      {(Array.isArray(category.articles) ? category.articles : []).map((article: string, i: number) => (
                         <li key={i}>
                           <Button 
                             variant="ghost" 
