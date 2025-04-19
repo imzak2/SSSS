@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -71,13 +70,13 @@ export default function RegisterPage() {
       <div className="fixed top-1/2 -right-28 w-96 h-96 rounded-full bg-gradient-to-r from-green-500/20 to-blue-500/20 blur-3xl"></div>
 
       {/* Back to Home Link */}
-      <Link
+      <a
         href="/"
         className="fixed top-6 left-6 flex items-center text-sm text-muted-foreground hover:text-purple-500 transition-colors duration-200"
       >
         <ChevronLeft className="h-4 w-4 mr-1" />
         {t('auth.backToHome')}
-      </Link>
+      </a>
 
       <div className="relative z-10 flex items-center justify-center min-h-screen p-4">
         <div className="w-full max-w-md">
@@ -252,12 +251,12 @@ export default function RegisterPage() {
               <CardFooter className="text-center">
                 <div className="text-sm text-muted-foreground">
                   {t('auth.register.haveAccount')}{' '}
-                  <Link
+                  <a
                     href="/login"
                     className="text-purple-500 hover:text-purple-600 font-medium underline-offset-4 hover:underline"
                   >
                     {t('auth.register.signIn')}
-                  </Link>
+                  </a>
                 </div>
               </CardFooter>
             </Card>
