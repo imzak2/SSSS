@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
@@ -8,18 +8,39 @@ import { Separator } from '@/components/ui/separator';
 export function Footer() {
   const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
-  
+
   const links = {
     resources: [
-      { name: t('footer.sections.resources.items.documentation'), href: '/resources/documentation' },
-      { name: t('footer.sections.resources.items.blog'), href: '/resources/blog' },
-      { name: t('footer.sections.resources.items.community'), href: '/resources/community' },
+      {
+        name: t('footer.sections.resources.items.documentation'),
+        href: '/resources/documentation',
+      },
+      {
+        name: t('footer.sections.resources.items.blog'),
+        href: '/resources/blog',
+      },
+      {
+        name: t('footer.sections.resources.items.community'),
+        href: '/resources/community',
+      },
     ],
     company: [
-      { name: t('footer.sections.company.items.about'), href: '/company/about' },
-      { name: t('footer.sections.company.items.careers'), href: '/company/careers' },
-      { name: t('footer.sections.company.items.contact'), href: '/company/contact' },
-      { name: t('footer.sections.company.items.privacy'), href: '/company/privacy' },
+      {
+        name: t('footer.sections.company.items.about'),
+        href: '/company/about',
+      },
+      {
+        name: t('footer.sections.company.items.careers'),
+        href: '/company/careers',
+      },
+      {
+        name: t('footer.sections.company.items.contact'),
+        href: '/company/contact',
+      },
+      {
+        name: t('footer.sections.company.items.privacy'),
+        href: '/company/privacy',
+      },
     ],
   };
 
@@ -38,27 +59,38 @@ export function Footer() {
               {t('footer.description')}
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-muted-foreground hover:text-purple-400 transition">
+              <a
+                href="#"
+                className="text-muted-foreground hover:text-purple-400 transition"
+              >
                 <Github className="h-5 w-5" />
                 <span className="sr-only">GitHub</span>
               </a>
-              <a href="#" className="text-muted-foreground hover:text-purple-400 transition">
+              <a
+                href="#"
+                className="text-muted-foreground hover:text-purple-400 transition"
+              >
                 <Twitter className="h-5 w-5" />
                 <span className="sr-only">Twitter</span>
               </a>
-              <a href="#" className="text-muted-foreground hover:text-purple-400 transition">
+              <a
+                href="#"
+                className="text-muted-foreground hover:text-purple-400 transition"
+              >
                 <Linkedin className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
               </a>
             </div>
           </div>
-          
+
           <div>
-            <h3 className="font-semibold mb-3">{t('footer.sections.resources.title')}</h3>
+            <h3 className="font-semibold mb-3">
+              {t('footer.sections.resources.title')}
+            </h3>
             <ul className="space-y-2">
               {links.resources.map((link, index) => (
                 <li key={index}>
-                  <Link 
+                  <Link
                     href={link.href}
                     className="text-muted-foreground hover:text-purple-400 transition"
                   >
@@ -68,13 +100,15 @@ export function Footer() {
               ))}
             </ul>
           </div>
-          
+
           <div>
-            <h3 className="font-semibold mb-3">{t('footer.sections.company.title')}</h3>
+            <h3 className="font-semibold mb-3">
+              {t('footer.sections.company.title')}
+            </h3>
             <ul className="space-y-2">
               {links.company.map((link, index) => (
                 <li key={index}>
-                  <Link 
+                  <Link
                     href={link.href}
                     className="text-muted-foreground hover:text-purple-400 transition"
                   >
@@ -85,9 +119,9 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        
+
         <Separator className="my-8" />
-        
+
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground">
             {t('footer.copyright', { year: currentYear })}

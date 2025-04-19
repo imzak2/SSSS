@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { 
@@ -30,6 +30,15 @@ interface DashboardSidebarProps {
 export function DashboardSidebar({ isOpen, isMobile, setIsOpen }: DashboardSidebarProps) {
   const pathname = usePathname();
   const [expanded, setExpanded] = useState<string | null>('pentesting');
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
   
   const navItems = [
     {

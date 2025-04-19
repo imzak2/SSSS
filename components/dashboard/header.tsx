@@ -16,20 +16,23 @@ interface DashboardHeaderProps {
 export function DashboardHeader({ isSidebarOpen, setIsSidebarOpen }: DashboardHeaderProps) {
   const [searchOpen, setSearchOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
   
   useEffect(() => {
+    setMounted(true);
     const checkScreenSize = () => {
       setIsMobile(window.innerWidth < 768);
     };
     
-    // Check on mount
     checkScreenSize();
-    
-    // Listen for window resize
     window.addEventListener('resize', checkScreenSize);
     
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
+
+  if (!mounted) {
+    return null;
+  }
   
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b border-border bg-background/95 backdrop-blur-sm px-4">

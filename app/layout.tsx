@@ -19,11 +19,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="preload" href="/locales/en/common.json" as="fetch" crossOrigin="anonymous" />
-        <link rel="preload" href="/locales/es/common.json" as="fetch" crossOrigin="anonymous" />
-        <link rel="preload" href="/locales/ja/common.json" as="fetch" crossOrigin="anonymous" />
-      </head>
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
