@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -10,46 +11,28 @@ import { Footer } from '@/components/landing/footer';
 import { Search, Book, FileText, Code, Terminal } from 'lucide-react';
 
 export default function DocumentationPage() {
+  const { t } = useTranslation();
+
   const categories = [
     {
-      title: "Getting Started",
+      title: t('resources.documentation.categories.gettingStarted.title'),
       icon: <Book className="h-6 w-6" />,
-      articles: [
-        "Platform Overview",
-        "Quick Start Guide",
-        "Account Setup",
-        "First Challenge"
-      ]
+      articles: t('resources.documentation.categories.gettingStarted.articles', { returnObjects: true })
     },
     {
-      title: "Challenge Guides",
+      title: t('resources.documentation.categories.challengeGuides.title'),
       icon: <Terminal className="h-6 w-6" />,
-      articles: [
-        "Web Security Basics",
-        "XSS Prevention",
-        "SQL Injection Defense",
-        "Authentication Best Practices"
-      ]
+      articles: t('resources.documentation.categories.challengeGuides.articles', { returnObjects: true })
     },
     {
-      title: "API Reference",
+      title: t('resources.documentation.categories.apiReference.title'),
       icon: <Code className="h-6 w-6" />,
-      articles: [
-        "REST API Overview",
-        "Authentication",
-        "Endpoints",
-        "Rate Limiting"
-      ]
+      articles: t('resources.documentation.categories.apiReference.articles', { returnObjects: true })
     },
     {
-      title: "Resources",
+      title: t('resources.documentation.categories.resources.title'),
       icon: <FileText className="h-6 w-6" />,
-      articles: [
-        "Best Practices",
-        "Security Guidelines",
-        "Tool Recommendations",
-        "Troubleshooting"
-      ]
+      articles: t('resources.documentation.categories.resources.articles', { returnObjects: true })
     }
   ];
 
@@ -60,15 +43,15 @@ export default function DocumentationPage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge className="mb-4">Documentation</Badge>
-            <h1 className="text-4xl font-bold mb-4 break-words">Learn How to Use KaliumLabs</h1>
+            <h1 className="text-4xl font-bold mb-4 break-words">{t('resources.documentation.title')}</h1>
             <p className="text-muted-foreground max-w-2xl mx-auto mb-8 break-words">
-              Comprehensive documentation to help you make the most of our platform.
+              {t('resources.documentation.description')}
             </p>
             <div className="max-w-2xl mx-auto relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
               <Input 
                 type="search" 
-                placeholder="Search documentation..."
+                placeholder={t('resources.documentation.searchPlaceholder')}
                 className="pl-10"
               />
             </div>
@@ -91,7 +74,7 @@ export default function DocumentationPage() {
                       <h2 className="text-xl font-bold break-words">{category.title}</h2>
                     </div>
                     <ul className="space-y-3">
-                      {category.articles.map((article, i) => (
+                      {category.articles.map((article: string, i: number) => (
                         <li key={i}>
                           <Button 
                             variant="ghost" 

@@ -171,15 +171,24 @@
       "posts": {
         "xss": {
           "title": "Entendiendo los Ataques XSS (Cross-Site Scripting)",
-          "excerpt": "Aprende sobre diferentes tipos de ataques XSS y cómo prevenirlos en tus aplicaciones."
+          "excerpt": "Aprende sobre diferentes tipos de ataques XSS y cómo prevenirlos en tus aplicaciones.",
+          "author": "Alex Rivera",
+          "date": "15 de marzo de 2024",
+          "category": "Seguridad Web"
         },
         "secureCoding": {
           "title": "Mejores Prácticas de Código Seguro en 2024",
-          "excerpt": "Mantente al día con las últimas prácticas de código seguro y protege tus aplicaciones."
+          "excerpt": "Mantente al día con las últimas prácticas de código seguro y protege tus aplicaciones.",
+          "author": "Sarah Chen",
+          "date": "12 de marzo de 2024",
+          "category": "Código Seguro"
         },
         "cryptography": {
           "title": "Introducción a la Criptografía",
-          "excerpt": "Una guía para principiantes para entender la criptografía y su importancia en la ciberseguridad."
+          "excerpt": "Una guía para principiantes para entender la criptografía y su importancia en la ciberseguridad.",
+          "author": "Dra. Elena Vásquez",
+          "date": "10 de marzo de 2024",
+          "category": "Criptografía"
         }
       }
     },
