@@ -9,9 +9,11 @@ import { Label } from '@/components/ui/label';
 import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card';
 import { Github, Terminal, Check } from 'lucide-react';
 import { signUp } from '@/lib/supabase-client';
+import { useTranslation } from '@/lib/i18n';
 
 export default function RegisterPage() {
   const router = useRouter();
+  const { t } = useTranslation();
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
