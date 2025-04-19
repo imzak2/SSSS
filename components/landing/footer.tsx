@@ -10,29 +10,23 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
   
   const links = {
-    product: [
-      { name: t('footer.sections.product.items.features'), href: '#features' },
-      { name: t('footer.sections.product.items.curriculum'), href: '#curriculum' },
-      { name: t('footer.sections.product.items.pricing'), href: '#pricing' },
-    ],
     resources: [
-      { name: t('footer.sections.resources.items.documentation'), href: '#' },
-      { name: t('footer.sections.resources.items.blog'), href: '#' },
-      { name: t('footer.sections.resources.items.community'), href: '#' },
-      { name: t('footer.sections.resources.items.learningPaths'), href: '#' },
+      { name: t('footer.sections.resources.items.documentation'), href: '/resources/documentation' },
+      { name: t('footer.sections.resources.items.blog'), href: '/resources/blog' },
+      { name: t('footer.sections.resources.items.community'), href: '/resources/community' },
     ],
     company: [
-      { name: t('footer.sections.company.items.about'), href: '#' },
-      { name: t('footer.sections.company.items.careers'), href: '#' },
-      { name: t('footer.sections.company.items.contact'), href: '#' },
-      { name: t('footer.sections.company.items.privacy'), href: '#' },
+      { name: t('footer.sections.company.items.about'), href: '/company/about' },
+      { name: t('footer.sections.company.items.careers'), href: '/company/careers' },
+      { name: t('footer.sections.company.items.contact'), href: '/company/contact' },
+      { name: t('footer.sections.company.items.privacy'), href: '/company/privacy' },
     ],
   };
 
   return (
     <footer className="bg-background/95 backdrop-blur-sm border-t border-border">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div>
             <Link href="/" className="flex items-center space-x-2 mb-4">
               <Terminal className="h-6 w-6 text-purple-500" />
@@ -57,22 +51,6 @@ export function Footer() {
                 <span className="sr-only">LinkedIn</span>
               </a>
             </div>
-          </div>
-          
-          <div>
-            <h3 className="font-semibold mb-3">{t('footer.sections.product.title')}</h3>
-            <ul className="space-y-2">
-              {links.product.map((link, index) => (
-                <li key={index}>
-                  <Link 
-                    href={link.href}
-                    className="text-muted-foreground hover:text-purple-400 transition"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
           </div>
           
           <div>
