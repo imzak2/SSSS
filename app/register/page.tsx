@@ -11,6 +11,7 @@ import { Github, Terminal, Check, Loader2, User, Mail, Lock, ChevronLeft } from 
 import { signUp } from '@/lib/supabase-client';
 import { useTranslation } from '@/lib/i18n';
 import { motion } from 'framer-motion';
+import { Progress } from '@/components/ui/progress';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -29,7 +30,7 @@ export default function RegisterPage() {
 
     try {
       await signUp(email, password);
-      router.push('/dashboard');
+      router.push('/login');
     } catch (err) {
       setError('Error creating account. Please try again.');
     } finally {
@@ -45,6 +46,23 @@ export default function RegisterPage() {
   const hasNumber = /[0-9]/.test(password);
   const hasSpecial = /[^A-Za-z0-9]/.test(password);
   const isPasswordValid = hasLength && hasUpperCase && hasNumber && hasSpecial;
+
+  // Calculate password strength
+  const getPasswordStrength = () => {
+    let strength = 0;
+    if (hasLength) strength += 25;
+    if (hasUpperCase) strength += 25;
+    if (hasNumber) strength += 25;
+    if (hasSpecial) strength += 25;
+    return strength;
+  };
+
+  const getStrengthColor = (strength: number) => {
+    if (strength <= 25) return 'bg-red-500';
+    if (strength <= 50) return 'bg-orange-500';
+    if (strength <= 75) return 'bg-yellow-500';
+    return 'bg-green-500';
+  };
 
   return (
     <main className="min-h-screen bg-[url('/images/circuit-pattern.png')] bg-repeat bg-opacity-5 relative overflow-hidden">
@@ -153,54 +171,35 @@ export default function RegisterPage() {
                       <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     </div>
 
-                    <div className="space-y-2 text-sm mt-4">
-                      <div className="flex items-center space-x-2">
-                        <div
-                          className={`w-4 h-4 rounded-full flex items-center justify-center transition-colors duration-200 ${
-                            hasLength ? 'bg-green-500' : 'bg-gray-300'
-                          }`}
-                        >
-                          {hasLength && <Check className="h-3 w-3 text-white" />}
+                    <div className="mt-4 space-y-3">
+                      <div className="space-y-2">
+                        <div className="flex justify-between items-center text-sm">
+                          <span className="text-muted-foreground">Password Strength</span>
+                          <span className={`font-medium ${getStrengthColor(getPasswordStrength()).replace('bg-', 'text-')}`}>
+                            {getPasswordStrength()}%
+                          </span>
                         </div>
-                        <span className={hasLength ? 'text-green-500' : 'text-muted-foreground'}>
-                          {t('auth.register.passwordStrength.characters')}
-                        </span>
+                        <Progress value={getPasswordStrength()} className="h-2" 
+                          indicatorClassName={getStrengthColor(getPasswordStrength())} />
                       </div>
-                      <div className="flex items-center space-x-2">
-                        <div
-                          className={`w-4 h-4 rounded-full flex items-center justify-center transition-colors duration-200 ${
-                            hasUpperCase ? 'bg-green-500' : 'bg-gray-300'
-                          }`}
-                        >
-                          {hasUpperCase && <Check className="h-3 w-3 text-white" />}
+
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className={`flex items-center space-x-2 text-sm ${hasLength ? 'text-green-500' : 'text-muted-foreground'}`}>
+                          <Check className={`h-4 w-4 ${hasLength ? 'opacity-100' : 'opacity-40'}`} />
+                          <span>8+ characters</span>
                         </div>
-                        <span className={hasUpperCase ? 'text-green-500' : 'text-muted-foreground'}>
-                          {t('auth.register.passwordStrength.uppercase')}
-                        </span>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <div
-                          className={`w-4 h-4 rounded-full flex items-center justify-center transition-colors duration-200 ${
-                            hasNumber ? 'bg-green-500' : 'bg-gray-300'
-                          }`}
-                        >
-                          {hasNumber && <Check className="h-3 w-3 text-white" />}
+                        <div className={`flex items-center space-x-2 text-sm ${hasUpperCase ? 'text-green-500' : 'text-muted-foreground'}`}>
+                          <Check className={`h-4 w-4 ${hasUpperCase ? 'opacity-100' : 'opacity-40'}`} />
+                          <span>Uppercase</span>
                         </div>
-                        <span className={hasNumber ? 'text-green-500' : 'text-muted-foreground'}>
-                          {t('auth.register.passwordStrength.number')}
-                        </span>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <div
-                          className={`w-4 h-4 rounded-full flex items-center justify-center transition-colors duration-200 ${
-                            hasSpecial ? 'bg-green-500' : 'bg-gray-300'
-                          }`}
-                        >
-                          {hasSpecial && <Check className="h-3 w-3 text-white" />}
+                        <div className={`flex items-center space-x-2 text-sm ${hasNumber ? 'text-green-500' : 'text-muted-foreground'}`}>
+                          <Check className={`h-4 w-4 ${hasNumber ? 'opacity-100' : 'opacity-40'}`} />
+                          <span>Number</span>
                         </div>
-                        <span className={hasSpecial ? 'text-green-500' : 'text-muted-foreground'}>
-                          {t('auth.register.passwordStrength.special')}
-                        </span>
+                        <div className={`flex items-center space-x-2 text-sm ${hasSpecial ? 'text-green-500' : 'text-muted-foreground'}`}>
+                          <Check className={`h-4 w-4 ${hasSpecial ? 'opacity-100' : 'opacity-40'}`} />
+                          <span>Special char</span>
+                        </div>
                       </div>
                     </div>
                   </div>
