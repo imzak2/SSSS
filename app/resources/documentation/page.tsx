@@ -60,8 +60,8 @@ export default function DocumentationPage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge className="mb-4">Documentation</Badge>
-            <h1 className="text-4xl font-bold mb-4">Learn How to Use KaliumLabs</h1>
-            <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
+            <h1 className="text-4xl font-bold mb-4 break-words">Learn How to Use KaliumLabs</h1>
+            <p className="text-muted-foreground max-w-2xl mx-auto mb-8 break-words">
               Comprehensive documentation to help you make the most of our platform.
             </p>
             <div className="max-w-2xl mx-auto relative">
@@ -88,12 +88,15 @@ export default function DocumentationPage() {
                       <div className="p-2 rounded-lg bg-purple-500/10 text-purple-500 mr-3">
                         {category.icon}
                       </div>
-                      <h2 className="text-xl font-bold">{category.title}</h2>
+                      <h2 className="text-xl font-bold break-words">{category.title}</h2>
                     </div>
                     <ul className="space-y-3">
                       {category.articles.map((article, i) => (
                         <li key={i}>
-                          <Button variant="ghost" className="w-full justify-start text-left">
+                          <Button 
+                            variant="ghost" 
+                            className="w-full justify-start text-left break-words whitespace-normal h-auto py-2"
+                          >
                             {article}
                           </Button>
                         </li>

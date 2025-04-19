@@ -120,17 +120,97 @@
     },
     "viewChallenges": "Ver Desafíos"
   },
+  "resources": {
+    "documentation": {
+      "title": "Documentación",
+      "description": "Documentación completa para ayudarte a aprovechar al máximo nuestra plataforma",
+      "searchPlaceholder": "Buscar en la documentación...",
+      "categories": {
+        "gettingStarted": {
+          "title": "Primeros Pasos",
+          "articles": [
+            "Descripción General de la Plataforma",
+            "Guía de Inicio Rápido",
+            "Configuración de la Cuenta",
+            "Primer Desafío"
+          ]
+        },
+        "challengeGuides": {
+          "title": "Guías de Desafíos",
+          "articles": [
+            "Fundamentos de Seguridad Web",
+            "Prevención de XSS",
+            "Defensa contra Inyección SQL",
+            "Mejores Prácticas de Autenticación"
+          ]
+        },
+        "apiReference": {
+          "title": "Referencia de API",
+          "articles": [
+            "Descripción General de REST API",
+            "Autenticación",
+            "Endpoints",
+            "Límites de Tasa"
+          ]
+        },
+        "resources": {
+          "title": "Recursos",
+          "articles": [
+            "Mejores Prácticas",
+            "Guías de Seguridad",
+            "Recomendaciones de Herramientas",
+            "Solución de Problemas"
+          ]
+        }
+      }
+    },
+    "blog": {
+      "title": "Blog",
+      "description": "Mantente actualizado con lo último en ciberseguridad, tutoriales y perspectivas de la industria",
+      "readMore": "Leer Más",
+      "posts": {
+        "xss": {
+          "title": "Entendiendo los Ataques XSS (Cross-Site Scripting)",
+          "excerpt": "Aprende sobre diferentes tipos de ataques XSS y cómo prevenirlos en tus aplicaciones."
+        },
+        "secureCoding": {
+          "title": "Mejores Prácticas de Código Seguro en 2024",
+          "excerpt": "Mantente al día con las últimas prácticas de código seguro y protege tus aplicaciones."
+        },
+        "cryptography": {
+          "title": "Introducción a la Criptografía",
+          "excerpt": "Una guía para principiantes para entender la criptografía y su importancia en la ciberseguridad."
+        }
+      }
+    },
+    "community": {
+      "title": "Comunidad",
+      "description": "Conéctate con otros entusiastas de la seguridad, comparte conocimientos y crece juntos",
+      "stats": {
+        "activeMembers": "Miembros Activos",
+        "dailyDiscussions": "Discusiones Diarias",
+        "challengesCompleted": "Desafíos Completados",
+        "successStories": "Historias de Éxito"
+      },
+      "features": {
+        "forums": {
+          "title": "Foros de Discusión",
+          "description": "Participa con otros entusiastas de la seguridad, comparte conocimientos y resuelve desafíos juntos."
+        },
+        "studyGroups": {
+          "title": "Grupos de Estudio",
+          "description": "Únete o crea grupos de estudio enfocados en temas específicos de seguridad o certificaciones."
+        },
+        "mentorship": {
+          "title": "Mentoría",
+          "description": "Conéctate con profesionales experimentados para obtener orientación y consejos profesionales."
+        }
+      }
+    }
+  },
   "footer": {
     "description": "La plataforma interactiva de aprendizaje de ciberseguridad enfocada en habilidades prácticas y progresión gamificada.",
     "sections": {
-      "product": {
-        "title": "Producto",
-        "items": {
-          "features": "Características",
-          "curriculum": "Plan de estudios",
-          "pricing": "Precios"
-        }
-      },
       "resources": {
         "title": "Recursos",
         "items": {
@@ -144,7 +224,7 @@
         "title": "Empresa",
         "items": {
           "about": "Acerca de",
-          "careers": "Carreras",
+          "careers": "Empleo",
           "contact": "Contacto",
           "privacy": "Política de Privacidad"
         }

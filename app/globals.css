@@ -74,9 +74,22 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border break-words;
   }
   body {
     @apply bg-background text-foreground;
+  }
+  h1, h2, h3, h4, h5, h6, p {
+    @apply break-words;
+  }
+  button {
+    @apply break-words whitespace-normal;
+  }
+}
+
+@layer utilities {
+  .break-anywhere {
+    word-break: break-word;
+    overflow-wrap: anywhere;
   }
 }

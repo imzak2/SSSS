@@ -120,17 +120,97 @@
     },
     "viewChallenges": "課題を見る"
   },
+  "resources": {
+    "documentation": {
+      "title": "ドキュメント",
+      "description": "プラットフォームを最大限に活用するための包括的なドキュメント",
+      "searchPlaceholder": "ドキュメントを検索...",
+      "categories": {
+        "gettingStarted": {
+          "title": "はじめに",
+          "articles": [
+            "プラットフォーム概要",
+            "クイックスタートガイド",
+            "アカウント設定",
+            "最初の課題"
+          ]
+        },
+        "challengeGuides": {
+          "title": "課題ガイド",
+          "articles": [
+            "Webセキュリティの基礎",
+            "XSS対策",
+            "SQLインジェクション対策",
+            "認証のベストプラクティス"
+          ]
+        },
+        "apiReference": {
+          "title": "APIリファレンス",
+          "articles": [
+            "REST API概要",
+            "認証",
+            "エンドポイント",
+            "レート制限"
+          ]
+        },
+        "resources": {
+          "title": "リソース",
+          "articles": [
+            "ベストプラクティス",
+            "セキュリティガイドライン",
+            "ツール推奨",
+            "トラブルシューティング"
+          ]
+        }
+      }
+    },
+    "blog": {
+      "title": "ブログ",
+      "description": "サイバーセキュリティの最新情報、チュートリアル、業界の洞察を入手",
+      "readMore": "続きを読む",
+      "posts": {
+        "xss": {
+          "title": "クロスサイトスクリプティング（XSS）攻撃を理解する",
+          "excerpt": "様々なXSS攻撃の種類とアプリケーションでの防止方法について学びます。"
+        },
+        "secureCoding": {
+          "title": "2024年のセキュアコーディングベストプラクティス",
+          "excerpt": "最新のセキュアコーディングプラクティスを学び、アプリケーションを保護します。"
+        },
+        "cryptography": {
+          "title": "暗号化入門",
+          "excerpt": "暗号化とサイバーセキュリティにおける重要性を理解するための初心者ガイド。"
+        }
+      }
+    },
+    "community": {
+      "title": "コミュニティ",
+      "description": "セキュリティ愛好家とつながり、知識を共有し、共に成長する",
+      "stats": {
+        "activeMembers": "アクティブメンバー",
+        "dailyDiscussions": "1日の討論数",
+        "challengesCompleted": "完了した課題",
+        "successStories": "成功事例"
+      },
+      "features": {
+        "forums": {
+          "title": "ディスカッションフォーラム",
+          "description": "セキュリティ愛好家と交流し、知識を共有し、課題を一緒に解決します。"
+        },
+        "studyGroups": {
+          "title": "学習グループ",
+          "description": "特定のセキュリティトピックや資格に焦点を当てた学習グループに参加または作成。"
+        },
+        "mentorship": {
+          "title": "メンターシップ",
+          "description": "経験豊富な専門家からガイダンスとキャリアアドバイスを受けられます。"
+        }
+      }
+    }
+  },
   "footer": {
     "description": "実践的なスキルとゲーム化された進行に焦点を当てたインタラクティブなサイバーセキュリティ学習プラットフォーム。",
     "sections": {
-      "product": {
-        "title": "製品",
-        "items": {
-          "features": "機能",
-          "curriculum": "カリキュラム",
-          "pricing": "料金"
-        }
-      },
       "resources": {
         "title": "リソース",
         "items": {
@@ -141,7 +221,7 @@
         }
       },
       "company": {
-        "title": "会社",
+        "title": "会社情報",
         "items": {
           "about": "会社概要",
           "careers": "採用情報",
