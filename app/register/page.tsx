@@ -11,6 +11,7 @@ import { signUp } from '@/lib/supabase-client';
 import { useTranslation } from '@/lib/i18n';
 import { motion } from 'framer-motion';
 import { Progress } from '@/components/ui/progress';
+import Link from 'next/link';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -69,15 +70,6 @@ export default function RegisterPage() {
       <div className="fixed top-20 -left-28 w-96 h-96 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 blur-3xl"></div>
       <div className="fixed top-1/2 -right-28 w-96 h-96 rounded-full bg-gradient-to-r from-green-500/20 to-blue-500/20 blur-3xl"></div>
 
-      {/* Back to Home Link */}
-      <a
-        href="/"
-        className="fixed top-6 left-6 flex items-center text-sm text-muted-foreground hover:text-purple-500 transition-colors duration-200"
-      >
-        <ChevronLeft className="h-4 w-4 mr-1" />
-        {t('auth.backToHome')}
-      </a>
-
       <div className="relative z-10 flex items-center justify-center min-h-screen p-4">
         <div className="w-full max-w-md">
           <motion.div
@@ -86,7 +78,15 @@ export default function RegisterPage() {
             transition={{ duration: 0.5 }}
           >
             <Card className="relative border-border/50 shadow-2xl bg-background/95 backdrop-blur-xl">
-              <CardHeader className="space-y-1 text-center pb-8">
+              <Link
+                href="/"
+                className="absolute top-4 left-4 flex items-center px-3 py-1.5 text-sm text-muted-foreground hover:text-purple-500 transition-colors duration-200 rounded-md hover:bg-purple-500/10"
+              >
+                <ChevronLeft className="h-4 w-4 mr-1" />
+                {t('auth.backToHome')}
+              </Link>
+
+              <CardHeader className="space-y-1 text-center pb-8 pt-16">
                 <motion.div
                   initial={{ scale: 0.5 }}
                   animate={{ scale: 1 }}
@@ -251,12 +251,12 @@ export default function RegisterPage() {
               <CardFooter className="text-center">
                 <div className="text-sm text-muted-foreground">
                   {t('auth.register.haveAccount')}{' '}
-                  <a
+                  <Link
                     href="/login"
                     className="text-purple-500 hover:text-purple-600 font-medium underline-offset-4 hover:underline"
                   >
                     {t('auth.register.signIn')}
-                  </a>
+                  </Link>
                 </div>
               </CardFooter>
             </Card>
