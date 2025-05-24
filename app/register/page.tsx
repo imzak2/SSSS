@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -16,6 +16,7 @@ import Link from 'next/link';
 export default function RegisterPage() {
   const router = useRouter();
   const { t } = useTranslation();
+  const [mounted, setMounted] = useState(false);
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -23,16 +24,28 @@ export default function RegisterPage() {
   const [error, setError] = useState('');
   const [touched, setTouched] = useState({ fullName: false, email: false, password: false });
 
+  // Prevent hydration mismatch by only rendering after mount
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
     try {
-      await signUp(email, password);
+      const response = await signUp(email, password);
+      
+      if (response.user?.identities?.length === 0) {
+        setError('This email is already registered. Please try logging in instead.');
+        return;
+      }
+
+      // Redirect to login page after successful registration
       router.push('/login');
-    } catch (err) {
-      setError('Error creating account. Please try again.');
+    } catch (err: any) {
+      setError(err.message || 'Error creating account. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -64,9 +77,13 @@ export default function RegisterPage() {
     return 'bg-green-500';
   };
 
+  // Prevent hydration issues by not rendering until mounted
+  if (!mounted) {
+    return null;
+  }
+
   return (
     <main className="min-h-screen bg-[url('/images/circuit-pattern.png')] bg-repeat bg-opacity-5 relative overflow-hidden">
-      {/* Gradient orbs */}
       <div className="fixed top-20 -left-28 w-96 h-96 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 blur-3xl"></div>
       <div className="fixed top-1/2 -right-28 w-96 h-96 rounded-full bg-gradient-to-r from-green-500/20 to-blue-500/20 blur-3xl"></div>
 

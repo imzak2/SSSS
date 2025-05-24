@@ -3,6 +3,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 import { 
   ShieldCheck, 
   Trophy, 
@@ -21,9 +22,21 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { supabase } from '@/lib/supabase-client';
 
 export function FeatureSection() {
   const { t } = useTranslation();
+  const router = useRouter();
+
+  const handleViewChallenges = async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    
+    if (session) {
+      router.push('/dashboard');
+    } else {
+      router.push('/login');
+    }
+  };
 
   const features = [
     {
@@ -165,7 +178,11 @@ export function FeatureSection() {
                     ))}
                   </ul>
                   
-                  <Button variant="outline" className="mt-auto w-full border-purple-500/30 hover:bg-purple-500/10 hover:border-purple-500/50">
+                  <Button 
+                    variant="outline" 
+                    className="mt-auto w-full border-purple-500/30 hover:bg-purple-500/10 hover:border-purple-500/50"
+                    onClick={handleViewChallenges}
+                  >
                     {t('curriculum.viewChallenges')}
                   </Button>
                 </div>
