@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Navbar } from '@/components/landing/navbar';
 import { Footer } from '@/components/landing/footer';
-import { Search, Book, FileText, Code, Terminal } from 'lucide-react';
+import { Search, Book, FileText } from 'lucide-react';
 
 export default function DocumentationPage() {
   const { t } = useTranslation();
@@ -21,13 +21,8 @@ export default function DocumentationPage() {
     },
     {
       title: t('resources.documentation.categories.challengeGuides.title'),
-      icon: <Terminal className="h-6 w-6" />,
+      icon: <Book className="h-6 w-6" />,
       articles: t('resources.documentation.categories.challengeGuides.articles', { returnObjects: true }) || []
-    },
-    {
-      title: t('resources.documentation.categories.apiReference.title'),
-      icon: <Code className="h-6 w-6" />,
-      articles: t('resources.documentation.categories.apiReference.articles', { returnObjects: true }) || []
     },
     {
       title: t('resources.documentation.categories.resources.title'),
@@ -57,7 +52,7 @@ export default function DocumentationPage() {
             </div>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {categories.map((category, index) => (
               <motion.div
                 key={index}
