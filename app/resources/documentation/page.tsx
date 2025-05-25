@@ -1,45 +1,42 @@
-"use client"
+"use client";
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { Navbar } from '@/components/landing/navbar';
 import { Footer } from '@/components/landing/footer';
-import { Search, Book, FileText } from 'lucide-react';
+import { DocContent } from '@/components/docs/doc-content';
+import { Search, Book, ChevronRight } from 'lucide-react';
+import { docs, getAllCategories, getDocsByCategory, getDocById } from '@/lib/docs';
+import { cn } from '@/lib/utils';
 
 export default function DocumentationPage() {
   const { t } = useTranslation();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedDoc, setSelectedDoc] = useState(docs[0]);
+  const categories = getAllCategories();
 
-  const categories = [
-    {
-      title: t('resources.documentation.categories.gettingStarted.title'),
-      icon: <Book className="h-6 w-6" />,
-      articles: t('resources.documentation.categories.gettingStarted.articles', { returnObjects: true }) || []
-    },
-    {
-      title: t('resources.documentation.categories.challengeGuides.title'),
-      icon: <Book className="h-6 w-6" />,
-      articles: t('resources.documentation.categories.challengeGuides.articles', { returnObjects: true }) || []
-    },
-    {
-      title: t('resources.documentation.categories.resources.title'),
-      icon: <FileText className="h-6 w-6" />,
-      articles: t('resources.documentation.categories.resources.articles', { returnObjects: true }) || []
-    }
-  ];
+  const filteredDocs = searchQuery
+    ? docs.filter(doc =>
+        doc.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        doc.content.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : docs;
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <main className="pt-24 pb-16">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <div className="text-center mb-8">
             <Badge className="mb-4">{t('resources.documentation.title')}</Badge>
-            <h1 className="text-4xl font-bold mb-4 break-words">{t('resources.documentation.title')}</h1>
-            <p className="text-muted-foreground max-w-2xl mx-auto mb-8 break-words">
+            <h1 className="text-4xl font-bold mb-4">{t('resources.documentation.title')}</h1>
+            <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
               {t('resources.documentation.description')}
             </p>
             <div className="max-w-2xl mx-auto relative">
@@ -48,42 +45,50 @@ export default function DocumentationPage() {
                 type="search" 
                 placeholder={t('resources.documentation.searchPlaceholder')}
                 className="pl-10"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {categories.map((category, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card>
-                  <CardContent className="p-6">
-                    <div className="flex items-center mb-4">
-                      <div className="p-2 rounded-lg bg-purple-500/10 text-purple-500 mr-3">
-                        {category.icon}
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <Card className="lg:col-span-1 bg-background/50 backdrop-blur-sm">
+              <ScrollArea className="h-[calc(100vh-250px)]">
+                <CardContent className="p-4">
+                  {categories.map(({ category, section }, index) => {
+                    const categoryDocs = getDocsByCategory(category);
+                    return (
+                      <div key={index} className="mb-6">
+                        <h3 className="font-semibold text-lg mb-2">{section}</h3>
+                        <ul className="space-y-1">
+                          {categoryDocs.map((doc) => (
+                            <li key={doc.id}>
+                              <Button
+                                variant="ghost"
+                                className={cn(
+                                  "w-full justify-start text-left",
+                                  selectedDoc.id === doc.id && "bg-purple-500/10 text-purple-500"
+                                )}
+                                onClick={() => setSelectedDoc(doc)}
+                              >
+                                <Book className="h-4 w-4 mr-2 flex-shrink-0" />
+                                <span className="truncate">{doc.title}</span>
+                              </Button>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
-                      <h2 className="text-xl font-bold break-words">{category.title}</h2>
-                    </div>
-                    <ul className="space-y-3">
-                      {(Array.isArray(category.articles) ? category.articles : []).map((article: string, i: number) => (
-                        <li key={i}>
-                          <Button 
-                            variant="ghost" 
-                            className="w-full justify-start text-left break-words whitespace-normal h-auto py-2"
-                          >
-                            {article}
-                          </Button>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+                    );
+                  })}
+                </CardContent>
+              </ScrollArea>
+            </Card>
+
+            <Card className="lg:col-span-3 bg-background/50 backdrop-blur-sm">
+              <CardContent className="p-6">
+                <DocContent doc={selectedDoc} />
+              </CardContent>
+            </Card>
           </div>
         </div>
       </main>
