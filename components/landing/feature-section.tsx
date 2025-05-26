@@ -17,7 +17,8 @@ import {
   Server,
   Database,
   Cpu,
-  Shield
+  Shield,
+  Crown
 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from '@/components/ui/badge';
@@ -94,7 +95,8 @@ export function FeatureSection() {
       title: t('curriculum.categories.cryptography.title'),
       icon: <Lock className="h-10 w-10 text-green-400" />,
       items: t('curriculum.categories.cryptography.items', { returnObjects: true }) || [],
-      color: "from-green-500 to-emerald-500"
+      color: "from-green-500 to-emerald-500",
+      beta: true
     }
   ];
 
@@ -162,6 +164,14 @@ export function FeatureSection() {
               <div key={index} className="relative group">
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600/50 to-blue-600/50 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
                 <div className="relative bg-background/95 backdrop-blur-sm rounded-lg p-6 h-full border border-border flex flex-col">
+                  {category.beta && (
+                    <div className="absolute top-4 right-4">
+                      <Badge variant="outline" className="bg-yellow-500/10 text-yellow-400 border-yellow-500/20">
+                        <Crown className="mr-1 h-3 w-3" />
+                        Coming Soon Beta Access
+                      </Badge>
+                    </div>
+                  )}
                   <div className="mb-6 flex items-center space-x-3">
                     <div className={`p-3 rounded-lg bg-gradient-to-r ${category.color} text-white`}>
                       {category.icon}
