@@ -196,6 +196,7 @@
         "title": "Resources",
         "items": {
           "documentation": "Documentation",
+          "blog": "Security Blog",
           "community": "Community",
           "learningPaths": "Learning Paths"
         }
@@ -204,6 +205,7 @@
         "title": "Company",
         "items": {
           "about": "About",
+          "careers": "Join Our Team",
           "contact": "Contact",
           "privacy": "Privacy Policy"
         }
