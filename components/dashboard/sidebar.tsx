@@ -3,19 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { 
-  Terminal, 
-  Code, 
-  Lock, 
-  Users, 
-  Trophy, 
-  Settings, 
-  HelpCircle,
-  BarChart3,
-  Home,
-  X,
-  ChevronRight
-} from 'lucide-react';
+import { Terminal, Code, Lock, Users, Trophy, Settings, HelpCircle, BarChart3, Home, X, ChevronRight, GraduationCap, PenTool as Tool } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -29,7 +17,7 @@ interface DashboardSidebarProps {
 
 export function DashboardSidebar({ isOpen, isMobile, setIsOpen }: DashboardSidebarProps) {
   const pathname = usePathname();
-  const [expanded, setExpanded] = useState<string | null>('pentesting');
+  const [expanded, setExpanded] = useState<string | null>('academy');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -48,38 +36,45 @@ export function DashboardSidebar({ isOpen, isMobile, setIsOpen }: DashboardSideb
       items: []
     },
     {
-      title: 'Pentesting Web',
-      icon: <Terminal className="h-5 w-5" />,
-      key: 'pentesting',
+      title: 'Academy',
+      icon: <GraduationCap className="h-5 w-5" />,
+      key: 'academy',
       items: [
-        { title: 'XSS Attacks', href: '/dashboard/pentesting/xss' },
-        { title: 'SQL Injection', href: '/dashboard/pentesting/sql-injection' },
-        { title: 'CSRF', href: '/dashboard/pentesting/csrf' },
-        { title: 'Authentication Bypass', href: '/dashboard/pentesting/auth-bypass' },
-        { title: 'File Inclusion', href: '/dashboard/pentesting/file-inclusion' },
+        {
+          title: 'Pentesting Web',
+          items: [
+            { title: 'XSS Attacks', href: '/dashboard/academy/pentesting/xss' },
+            { title: 'SQL Injection', href: '/dashboard/academy/pentesting/sql-injection' },
+            { title: 'CSRF', href: '/dashboard/academy/pentesting/csrf' },
+            { title: 'Authentication Bypass', href: '/dashboard/academy/pentesting/auth-bypass' },
+            { title: 'File Inclusion', href: '/dashboard/academy/pentesting/file-inclusion' },
+          ]
+        },
+        {
+          title: 'Programming',
+          items: [
+            { title: 'Secure Coding', href: '/dashboard/academy/programming/secure-coding' },
+            { title: 'Exploit Development', href: '/dashboard/academy/programming/exploit-dev' },
+            { title: 'Automation', href: '/dashboard/academy/programming/automation' },
+            { title: 'Reverse Engineering', href: '/dashboard/academy/programming/reverse-engineering' },
+          ]
+        },
+        {
+          title: 'Cryptography',
+          items: [
+            { title: 'Encryption', href: '/dashboard/academy/cryptography/encryption' },
+            { title: 'Hashing', href: '/dashboard/academy/cryptography/hashing' },
+            { title: 'Key Exchange', href: '/dashboard/academy/cryptography/key-exchange' },
+            { title: 'Digital Signatures', href: '/dashboard/academy/cryptography/digital-signatures' },
+          ]
+        }
       ]
     },
     {
-      title: 'Programming',
-      icon: <Code className="h-5 w-5" />,
-      key: 'programming',
-      items: [
-        { title: 'Secure Coding', href: '/dashboard/programming/secure-coding' },
-        { title: 'Exploit Development', href: '/dashboard/programming/exploit-dev' },
-        { title: 'Automation', href: '/dashboard/programming/automation' },
-        { title: 'Reverse Engineering', href: '/dashboard/programming/reverse-engineering' },
-      ]
-    },
-    {
-      title: 'Cryptography',
-      icon: <Lock className="h-5 w-5" />,
-      key: 'cryptography',
-      items: [
-        { title: 'Encryption', href: '/dashboard/cryptography/encryption' },
-        { title: 'Hashing', href: '/dashboard/cryptography/hashing' },
-        { title: 'Key Exchange', href: '/dashboard/cryptography/key-exchange' },
-        { title: 'Digital Signatures', href: '/dashboard/cryptography/digital-signatures' },
-      ]
+      title: 'Tools',
+      icon: <Tool className="h-5 w-5" />,
+      href: '/dashboard/tools',
+      items: []
     },
     {
       title: 'Leaderboard',
@@ -120,7 +115,6 @@ export function DashboardSidebar({ isOpen, isMobile, setIsOpen }: DashboardSideb
   
   return (
     <>
-      {/* Overlay for mobile */}
       {isMobile && isOpen && (
         <div 
           className="fixed inset-0 bg-background/80 backdrop-blur-sm z-40"
@@ -181,21 +175,28 @@ export function DashboardSidebar({ isOpen, isMobile, setIsOpen }: DashboardSideb
                       </Button>
                       
                       {expanded === item.key && (
-                        <div className="ml-6 space-y-1 pt-1">
-                          {item.items.map((subItem, subIndex) => (
-                            <Link
-                              key={subIndex}
-                              href={subItem.href}
-                              className={cn(
-                                "flex items-center py-1.5 px-3 text-sm rounded-md",
-                                pathname === subItem.href
-                                  ? "bg-purple-500/10 text-purple-500 font-medium"
-                                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                              )}
-                              onClick={() => isMobile && setIsOpen(false)}
-                            >
-                              {subItem.title}
-                            </Link>
+                        <div className="ml-6 space-y-4 pt-2">
+                          {item.items.map((section, sectionIndex) => (
+                            <div key={sectionIndex}>
+                              <h4 className="text-sm font-medium mb-2">{section.title}</h4>
+                              <div className="space-y-1">
+                                {section.items.map((subItem, subIndex) => (
+                                  <Link
+                                    key={subIndex}
+                                    href={subItem.href}
+                                    className={cn(
+                                      "flex items-center py-1.5 px-3 text-sm rounded-md",
+                                      pathname === subItem.href
+                                        ? "bg-purple-500/10 text-purple-500 font-medium"
+                                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                                    )}
+                                    onClick={() => isMobile && setIsOpen(false)}
+                                  >
+                                    {subItem.title}
+                                  </Link>
+                                ))}
+                              </div>
+                            </div>
                           ))}
                         </div>
                       )}
