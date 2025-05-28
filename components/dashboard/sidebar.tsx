@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Terminal, Code, Lock, Users, Trophy, Settings, HelpCircle, BarChart3, Home, X, ChevronRight, GraduationCap, PenTool as Tool } from 'lucide-react';
+import { Terminal, Code, Lock, Users, Trophy, Settings, HelpCircle, BarChart3, Home, X, ChevronRight, GraduationCap, PenTool as Tool, FlaskRound as Flask } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -33,6 +33,12 @@ export function DashboardSidebar({ isOpen, isMobile, setIsOpen }: DashboardSideb
       title: 'Overview',
       icon: <Home className="h-5 w-5" />,
       href: '/dashboard',
+      items: []
+    },
+    {
+      title: 'Labs',
+      icon: <Flask className="h-5 w-5" />,
+      href: '/dashboard/labs',
       items: []
     },
     {

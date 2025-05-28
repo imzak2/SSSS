@@ -3,332 +3,239 @@
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Terminal, Code, Lock, ArrowRight, Trophy, Users, Star } from 'lucide-react';
+import { Terminal, Code, Lock, ArrowRight, Trophy, Users, Star, Target, Flag, Award, Zap } from 'lucide-react';
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function DashboardPage() {
-  const labs = [
+  const userStats = {
+    rank: 17,
+    teamRank: 8,
+    points: 1962,
+    machines: 112,
+    ownershipRate: 31.51,
+    level: 20,
+    respect: 72,
+    rankProgress: 75
+  };
+
+  const recentActivity = [
     {
-      title: "Programming Lab",
-      icon: <Code className="h-6 w-6" />,
-      description: "Practice secure coding and exploit development",
-      machines: [
-        { 
-          name: "Buffer Overflow 101", 
-          difficulty: "Easy", 
-          points: 20,
-          completionRate: "45%",
-          os: "Linux",
-          ip: "10.10.10.1",
-          status: "active"
-        },
-        { 
-          name: "Race Condition", 
-          difficulty: "Medium", 
-          points: 30,
-          completionRate: "32%",
-          os: "Linux",
-          ip: "10.10.10.2",
-          status: "active"
-        },
-        { 
-          name: "Memory Corruption", 
-          difficulty: "Hard", 
-          points: 50,
-          completionRate: "15%",
-          os: "Windows",
-          ip: "10.10.10.3",
-          status: "active"
-        }
-      ],
-      color: "from-blue-500 to-cyan-500"
+      type: "machine_owned",
+      title: "Owned Machine: CyberSploit1",
+      points: 20,
+      timestamp: "2 hours ago"
     },
     {
-      title: "Cryptography Lab",
-      icon: <Lock className="h-6 w-6" />,
-      description: "Master cryptographic challenges and techniques",
-      machines: [
-        { 
-          name: "Classic Ciphers", 
-          difficulty: "Easy", 
-          points: 20,
-          completionRate: "52%",
-          os: "Linux",
-          ip: "10.10.10.4",
-          status: "active"
-        },
-        { 
-          name: "RSA Challenge", 
-          difficulty: "Medium", 
-          points: 30,
-          completionRate: "28%",
-          os: "Linux",
-          ip: "10.10.10.5",
-          status: "active"
-        },
-        { 
-          name: "Hash Cracking", 
-          difficulty: "Hard", 
-          points: 40,
-          completionRate: "20%",
-          os: "Linux",
-          ip: "10.10.10.6",
-          status: "active"
-        }
-      ],
-      color: "from-purple-500 to-pink-500"
+      type: "challenge_completed",
+      title: "Completed: Basic Pentesting",
+      points: 10,
+      timestamp: "5 hours ago"
     },
     {
-      title: "Web Pentesting Lab",
-      icon: <Terminal className="h-6 w-6" />,
-      description: "Exploit web vulnerabilities in realistic scenarios",
-      machines: [
-        { 
-          name: "XSS Playground", 
-          difficulty: "Easy", 
-          points: 25,
-          completionRate: "48%",
-          os: "Linux",
-          ip: "10.10.10.7",
-          status: "active"
-        },
-        { 
-          name: "SQL Injection", 
-          difficulty: "Medium", 
-          points: 35,
-          completionRate: "35%",
-          os: "Windows",
-          ip: "10.10.10.8",
-          status: "active"
-        },
-        { 
-          name: "Authentication Bypass", 
-          difficulty: "Hard", 
-          points: 45,
-          completionRate: "18%",
-          os: "Linux",
-          ip: "10.10.10.9",
-          status: "active"
-        }
-      ],
-      color: "from-red-500 to-orange-500"
+      type: "rank_up",
+      title: "New Rank: Guru",
+      points: 0,
+      timestamp: "1 day ago"
     }
   ];
 
-  const rankings = {
-    webPentesting: [
-      { rank: 1, name: "h4ck3r", points: 450, machines: 8 },
-      { rank: 2, name: "securecoder", points: 380, machines: 7 },
-      { rank: 3, name: "pwn3r", points: 350, machines: 6 },
-      { rank: 4, name: "cyberwarrior", points: 320, machines: 6 },
-      { rank: 5, name: "rootkit", points: 290, machines: 5 }
-    ],
-    programming: [
-      { rank: 1, name: "codebeast", points: 380, challenges: 12 },
-      { rank: 2, name: "debugger", points: 340, challenges: 10 },
-      { rank: 3, name: "compiler", points: 310, challenges: 9 },
-      { rank: 4, name: "bitmaster", points: 280, challenges: 8 },
-      { rank: 5, name: "algorithm", points: 250, challenges: 7 }
-    ],
-    cryptography: [
-      { rank: 1, name: "cryptoking", points: 420, challenges: 14 },
-      { rank: 2, name: "cipher", points: 360, challenges: 12 },
-      { rank: 3, name: "enigma", points: 330, challenges: 11 },
-      { rank: 4, name: "decoder", points: 300, challenges: 10 },
-      { rank: 5, name: "hash", points: 270, challenges: 9 }
-    ],
-    teams: [
-      { rank: 1, name: "Elite Hackers", points: 1200, totalPwned: 32 },
-      { rank: 2, name: "Security Ninjas", points: 1050, totalPwned: 28 },
-      { rank: 3, name: "Binary Bandits", points: 950, totalPwned: 25 },
-      { rank: 4, name: "Cyber Dragons", points: 850, totalPwned: 23 },
-      { rank: 5, name: "Code Warriors", points: 750, totalPwned: 20 }
-    ]
-  };
+  const achievements = [
+    {
+      title: "First Blood",
+      description: "First to own a machine",
+      icon: <Flag className="h-5 w-5" />,
+      color: "from-red-500 to-orange-500"
+    },
+    {
+      title: "Persistence",
+      description: "30 day streak",
+      icon: <Zap className="h-5 w-5" />,
+      color: "from-blue-500 to-cyan-500"
+    },
+    {
+      title: "Elite Hacker",
+      description: "Reached level 20",
+      icon: <Award className="h-5 w-5" />,
+      color: "from-purple-500 to-pink-500"
+    }
+  ];
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
-        <div>
-          <h1 className="text-3xl font-bold">Labs Overview</h1>
-          <p className="text-muted-foreground">Choose your challenge and start hacking</p>
-        </div>
+      {/* User Overview Section */}
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+        >
+          <Card className="bg-background/50 backdrop-blur-sm">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-4">
+                  <div className="h-16 w-16 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 flex items-center justify-center text-white text-xl font-bold">
+                    {userStats.level}
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold">Guru</h3>
+                    <p className="text-sm text-muted-foreground">Current Rank</p>
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted-foreground">Progress to next rank</span>
+                  <span>{userStats.rankProgress}%</span>
+                </div>
+                <Progress value={userStats.rankProgress} className="h-1" />
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          <Card className="bg-background/50 backdrop-blur-sm">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-muted-foreground">Global Rank</p>
+                  <h3 className="text-2xl font-bold">#{userStats.rank}</h3>
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">Team Rank</p>
+                  <h3 className="text-2xl font-bold">#{userStats.teamRank}</h3>
+                </div>
+              </div>
+              <div className="mt-4">
+                <p className="text-sm text-muted-foreground">Ownership Rate</p>
+                <div className="flex items-center mt-1">
+                  <div className="flex-1">
+                    <Progress value={userStats.ownershipRate} className="h-1" />
+                  </div>
+                  <span className="ml-2 text-sm font-medium">{userStats.ownershipRate}%</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+        >
+          <Card className="bg-background/50 backdrop-blur-sm">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-muted-foreground">Points</p>
+                  <h3 className="text-2xl font-bold">{userStats.points}</h3>
+                </div>
+                <Trophy className="h-8 w-8 text-yellow-500" />
+              </div>
+              <div className="mt-4">
+                <p className="text-sm text-muted-foreground">Machines Owned</p>
+                <h4 className="text-xl font-bold mt-1">{userStats.machines}</h4>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+        >
+          <Card className="bg-background/50 backdrop-blur-sm">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-muted-foreground">Respect</p>
+                  <h3 className="text-2xl font-bold">{userStats.respect}</h3>
+                </div>
+                <Star className="h-8 w-8 text-purple-500" />
+              </div>
+              <div className="mt-4">
+                <p className="text-sm text-muted-foreground">Active Streak</p>
+                <div className="flex items-center mt-1">
+                  <Zap className="h-5 w-5 text-green-500 mr-2" />
+                  <span className="font-bold">7 days</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {labs.map((lab, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-          >
-            <Card className="relative overflow-hidden">
-              <div className={`absolute inset-0 bg-gradient-to-br ${lab.color} opacity-5`} />
-              <CardHeader>
-                <div className={`inline-flex p-3 rounded-lg bg-gradient-to-r ${lab.color} text-white mb-4`}>
-                  {lab.icon}
-                </div>
-                <CardTitle className="text-xl mb-2">{lab.title}</CardTitle>
-                <p className="text-muted-foreground text-sm">{lab.description}</p>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {lab.machines.map((machine, idx) => (
-                    <div key={idx} className="relative group">
-                      <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600/50 to-blue-600/50 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
-                      <div className="relative bg-background p-4 rounded-lg border border-border">
-                        <div className="flex items-center justify-between mb-2">
-                          <h4 className="font-medium">{machine.name}</h4>
-                          <Badge 
-                            className={
-                              machine.difficulty === "Easy" ? "bg-green-500/10 text-green-400 border-green-500/20" :
-                              machine.difficulty === "Medium" ? "bg-yellow-500/10 text-yellow-400 border-yellow-500/20" :
-                              "bg-red-500/10 text-red-400 border-red-500/20"
-                            }
-                          >
-                            {machine.difficulty}
-                          </Badge>
-                        </div>
-                        <div className="flex items-center justify-between text-sm text-muted-foreground mb-2">
-                          <div className="flex items-center space-x-2">
-                            <span>{machine.os}</span>
-                            <span>•</span>
-                            <span>{machine.points} points</span>
-                          </div>
-                          <span>{machine.ip}</span>
-                        </div>
-                        <div className="space-y-2">
-                          <div className="flex justify-between text-sm">
-                            <span className="text-muted-foreground">Completion Rate</span>
-                            <span>{machine.completionRate}</span>
-                          </div>
-                          <Progress value={parseInt(machine.completionRate)} className="h-1" />
-                        </div>
-                        <Button 
-                          className="w-full mt-4 bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600"
-                        >
-                          Start Machine <ArrowRight className="ml-2 h-4 w-4" />
-                        </Button>
+      {/* Recent Activity & Achievements */}
+      <div className="grid gap-6 md:grid-cols-2">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+        >
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-xl">Recent Activity</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {recentActivity.map((activity, index) => (
+                  <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-background/50 hover:bg-muted/50 transition-colors">
+                    <div className="flex items-center space-x-3">
+                      <Target className="h-5 w-5 text-purple-500" />
+                      <div>
+                        <p className="font-medium">{activity.title}</p>
+                        <p className="text-sm text-muted-foreground">{activity.timestamp}</p>
                       </div>
                     </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
-      </div>
-
-      <Card className="mt-8">
-        <CardHeader>
-          <CardTitle className="flex items-center">
-            <Trophy className="h-5 w-5 text-yellow-400 mr-2" />
-            Rankings
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Tabs defaultValue="web" className="space-y-4">
-            <TabsList className="grid grid-cols-4">
-              <TabsTrigger value="web">Web Pentesting</TabsTrigger>
-              <TabsTrigger value="programming">Programming</TabsTrigger>
-              <TabsTrigger value="crypto">Cryptography</TabsTrigger>
-              <TabsTrigger value="teams">Team Rankings</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="web" className="space-y-4">
-              <div className="space-y-2">
-                {rankings.webPentesting.map((user, index) => (
-                  <RankingRow 
-                    key={index}
-                    rank={user.rank}
-                    name={user.name}
-                    points={user.points}
-                    extra={`${user.machines} machines pwned`}
-                  />
+                    {activity.points > 0 && (
+                      <Badge variant="outline" className="bg-green-500/10 text-green-400 border-green-500/20">
+                        +{activity.points} pts
+                      </Badge>
+                    )}
+                  </div>
                 ))}
               </div>
-            </TabsContent>
+            </CardContent>
+          </Card>
+        </motion.div>
 
-            <TabsContent value="programming" className="space-y-4">
-              <div className="space-y-2">
-                {rankings.programming.map((user, index) => (
-                  <RankingRow 
-                    key={index}
-                    rank={user.rank}
-                    name={user.name}
-                    points={user.points}
-                    extra={`${user.challenges} challenges solved`}
-                  />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+        >
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-xl">Recent Achievements</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {achievements.map((achievement, index) => (
+                  <div key={index} className="relative group">
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600/50 to-blue-600/50 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+                    <div className="relative flex items-center space-x-4 p-4 bg-background rounded-lg">
+                      <div className={`p-2 rounded-lg bg-gradient-to-r ${achievement.color} text-white`}>
+                        {achievement.icon}
+                      </div>
+                      <div>
+                        <h4 className="font-medium">{achievement.title}</h4>
+                        <p className="text-sm text-muted-foreground">{achievement.description}</p>
+                      </div>
+                    </div>
+                  </div>
                 ))}
               </div>
-            </TabsContent>
-
-            <TabsContent value="crypto" className="space-y-4">
-              <div className="space-y-2">
-                {rankings.cryptography.map((user, index) => (
-                  <RankingRow 
-                    key={index}
-                    rank={user.rank}
-                    name={user.name}
-                    points={user.points}
-                    extra={`${user.challenges} challenges solved`}
-                  />
-                ))}
-              </div>
-            </TabsContent>
-
-            <TabsContent value="teams" className="space-y-4">
-              <div className="space-y-2">
-                {rankings.teams.map((team, index) => (
-                  <RankingRow 
-                    key={index}
-                    rank={team.rank}
-                    name={team.name}
-                    points={team.points}
-                    extra={`${team.totalPwned} total pwned`}
-                    isTeam
-                  />
-                ))}
-              </div>
-            </TabsContent>
-          </Tabs>
-        </CardContent>
-      </Card>
-    </div>
-  );
-}
-
-function RankingRow({ rank, name, points, extra, isTeam = false }: { 
-  rank: number; 
-  name: string; 
-  points: number; 
-  extra: string;
-  isTeam?: boolean;
-}) {
-  return (
-    <div className="flex items-center justify-between p-3 rounded-lg bg-background/50 border border-border hover:bg-muted/50 transition-colors">
-      <div className="flex items-center space-x-4">
-        <div className={`w-8 h-8 flex items-center justify-center rounded-full ${
-          rank === 1 ? "bg-yellow-500/10 text-yellow-400 border border-yellow-500/20" :
-          rank === 2 ? "bg-gray-300/10 text-gray-400 border border-gray-300/20" :
-          rank === 3 ? "bg-orange-500/10 text-orange-400 border border-orange-500/20" :
-          "bg-muted text-muted-foreground"
-        }`}>
-          {rank}
-        </div>
-        <div className="flex items-center space-x-2">
-          {isTeam ? <Users className="h-4 w-4 text-purple-400" /> : <Star className="h-4 w-4 text-purple-400" />}
-          <span className="font-medium">{name}</span>
-        </div>
-      </div>
-      <div className="flex items-center space-x-4">
-        <span className="text-sm text-muted-foreground">{extra}</span>
-        <Badge variant="outline" className="bg-purple-500/10 text-purple-400 border-purple-500/20">
-          {points} pts
-        </Badge>
+            </CardContent>
+          </Card>
+        </motion.div>
       </div>
     </div>
   );
