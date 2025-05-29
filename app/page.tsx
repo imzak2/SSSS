@@ -6,10 +6,10 @@ import { HeroSection } from '@/components/landing/hero-section';
 import { FeatureSection } from '@/components/landing/feature-section';
 import { Footer } from '@/components/landing/footer';
 import { Navbar } from '@/components/landing/navbar';
-import { Check, Zap, Crown, Terminal } from 'lucide-react';
+import { Check, Crown, Terminal, Zap } from 'lucide-react';
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 
 export default function Home() {
@@ -79,60 +79,7 @@ export default function Home() {
 
             <div className="grid gap-8 md:grid-cols-2 max-w-5xl mx-auto">
               {plans.map((plan, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <div className="relative group">
-                    <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600/50 to-blue-600/50 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
-                    <Card className={`relative bg-background border-border ${plan.popular ? 'border-purple-500' : ''}`}>
-                      {plan.popular && (
-                        <div className="absolute top-0 right-0 -translate-y-1/2 px-3 py-1 bg-gradient-to-r from-purple-600 to-blue-500 text-white text-sm rounded-full">
-                          Most Popular
-                        </div>
-                      )}
-                      <CardHeader>
-                        <div className="flex items-center space-x-3 mb-4">
-                          <div className={`p-3 rounded-lg ${plan.popular
-                              ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white'
-                              : 'bg-purple-500/10 text-purple-500'
-                            }`}>
-                            {plan.icon}
-                          </div>
-                          <CardTitle className="text-2xl">{plan.name}</CardTitle>
-                        </div>
-                        <div className="flex items-baseline">
-                          <span className="text-4xl font-bold">${plan.price}</span>
-                          <span className="text-muted-foreground ml-2">/mo</span>
-                        </div>
-                        <p className="text-muted-foreground mt-2">{plan.description}</p>
-                      </CardHeader>
-                      <CardContent>
-                        <ul className="space-y-4 mb-8">
-                          {plan.features.map((feature, i) => (
-                            <li key={i} className="flex items-center">
-                              <Check className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                              <span>{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
-                        <Button 
-                          className={`w-full ${plan.popular
-                              ? 'bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600'
-                              : ''
-                            }`}
-                          variant={plan.popular ? 'default' : 'outline'}
-                          onClick={() => handleSubscribe(plan.id)}
-                        >
-                          Get Started
-                          {plan.popular && <Zap className="ml-2 h-4 w-4" />}
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  </div>
-                </motion.div>
+                <PerspectiveCard key={index} plan={plan} onSubscribe={handleSubscribe} />
               ))}
             </div>
           </div>
@@ -141,5 +88,116 @@ export default function Home() {
         <Footer />
       </div>
     </div>
+  );
+}
+
+interface PerspectiveCardProps {
+  plan: {
+    id: string;
+    name: string;
+    price: string;
+    description: string;
+    features: string[];
+    popular?: boolean;
+    icon: React.ReactNode;
+  };
+  onSubscribe: (planId: string) => void;
+}
+
+function PerspectiveCard({ plan, onSubscribe }: PerspectiveCardProps) {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  // Smooth spring animation for rotation
+  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [15, -15]), {
+    stiffness: 500,
+    damping: 30
+  });
+  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-15, 15]), {
+    stiffness: 500,
+    damping: 30
+  });
+
+  function handleMouseMove(event: React.MouseEvent<HTMLDivElement>) {
+    const rect = event.currentTarget.getBoundingClientRect();
+    
+    // Calculate relative position (0 to 1)
+    const relativeX = (event.clientX - rect.left) / rect.width;
+    const relativeY = (event.clientY - rect.top) / rect.height;
+    
+    // Convert to -0.5 to 0.5 range
+    x.set(relativeX - 0.5);
+    y.set(relativeY - 0.5);
+  }
+
+  function handleMouseLeave() {
+    x.set(0);
+    y.set(0);
+  }
+
+  return (
+    <motion.div
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        perspective: 1000,
+        transformStyle: "preserve-3d"
+      }}
+    >
+      <motion.div
+        style={{
+          rotateX,
+          rotateY,
+          transformStyle: "preserve-3d"
+        }}
+        className="relative group"
+      >
+        <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600/50 to-blue-600/50 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+        <Card className={`relative bg-background border-border ${plan.popular ? 'border-purple-500' : ''}`}>
+          {plan.popular && (
+            <div className="absolute top-0 right-0 -translate-y-1/2 px-3 py-1 bg-gradient-to-r from-purple-600 to-blue-500 text-white text-sm rounded-full">
+              Most Popular
+            </div>
+          )}
+          <CardHeader>
+            <div className="flex items-center space-x-3 mb-4">
+              <div className={`p-3 rounded-lg ${plan.popular
+                  ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white'
+                  : 'bg-purple-500/10 text-purple-500'
+                }`}>
+                {plan.icon}
+              </div>
+              <CardTitle className="text-2xl">{plan.name}</CardTitle>
+            </div>
+            <div className="flex items-baseline">
+              <span className="text-4xl font-bold">${plan.price}</span>
+              <span className="text-muted-foreground ml-2">/mo</span>
+            </div>
+            <p className="text-muted-foreground mt-2">{plan.description}</p>
+          </CardHeader>
+          <CardContent>
+            <ul className="space-y-4 mb-8">
+              {plan.features.map((feature, i) => (
+                <li key={i} className="flex items-center">
+                  <Check className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+            <Button 
+              className={`w-full ${plan.popular
+                  ? 'bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600'
+                  : ''
+                }`}
+              variant={plan.popular ? 'default' : 'outline'}
+              onClick={() => onSubscribe(plan.id)}
+            >
+              Get Started
+              {plan.popular && <Zap className="ml-2 h-4 w-4" />}
+            </Button>
+          </CardContent>
+        </Card>
+      </motion.div>
+    </motion.div>
   );
 }
