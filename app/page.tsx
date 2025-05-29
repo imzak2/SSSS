@@ -7,14 +7,18 @@ import { FeatureSection } from '@/components/landing/feature-section';
 import { Footer } from '@/components/landing/footer';
 import { Navbar } from '@/components/landing/navbar';
 import { Check, Zap, Crown, Terminal } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+  const router = useRouter();
+  
   const plans = [
-    {
-      name: "KVIP",
+    { 
+      id: "kvip",
+      name: "KVIP", 
       price: "15",
       description: "Perfect for getting started with web security",
       features: [
@@ -25,8 +29,9 @@ export default function Home() {
       ],
       icon: <Terminal className="h-6 w-6" />
     },
-    {
-      name: "Sudoer",
+    { 
+      id: "sudoer",
+      name: "Sudoer", 
       price: "30",
       description: "For serious security professionals",
       features: [
@@ -42,6 +47,10 @@ export default function Home() {
       icon: <Crown className="h-6 w-6" />
     }
   ];
+
+  const handleSubscribe = (planId: string) => {
+    router.push(`/checkout?plan=${planId}`);
+  };
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
@@ -76,49 +85,53 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  <Card className={`relative h-full ${plan.popular ? 'border-purple-500' : ''}`}>
-                    {plan.popular && (
-                      <div className="absolute top-0 right-0 -translate-y-1/2 px-3 py-1 bg-gradient-to-r from-purple-600 to-blue-500 text-white text-sm rounded-full">
-                        Most Popular
-                      </div>
-                    )}
-                    <CardHeader>
-                      <div className="flex items-center space-x-3 mb-4">
-                        <div className={`p-3 rounded-lg ${plan.popular
-                            ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white'
-                            : 'bg-purple-500/10 text-purple-500'
-                          }`}>
-                          {plan.icon}
+                  <div className="relative group">
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600/50 to-blue-600/50 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+                    <Card className={`relative bg-background border-border ${plan.popular ? 'border-purple-500' : ''}`}>
+                      {plan.popular && (
+                        <div className="absolute top-0 right-0 -translate-y-1/2 px-3 py-1 bg-gradient-to-r from-purple-600 to-blue-500 text-white text-sm rounded-full">
+                          Most Popular
                         </div>
-                        <CardTitle className="text-2xl">{plan.name}</CardTitle>
-                      </div>
-                      <div className="flex items-baseline">
-                        <span className="text-4xl font-bold">${plan.price}</span>
-                        <span className="text-muted-foreground ml-2">/mo</span>
-                      </div>
-                      <p className="text-muted-foreground mt-2">{plan.description}</p>
-                    </CardHeader>
-                    <CardContent>
-                      <ul className="space-y-4 mb-8">
-                        {plan.features.map((feature, i) => (
-                          <li key={i} className="flex items-center">
-                            <Check className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                            <span>{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <Button
-                        className={`w-full ${plan.popular
-                            ? 'bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600'
-                            : ''
-                          }`}
-                        variant={plan.popular ? 'default' : 'outline'}
-                      >
-                        Get Started
-                        {plan.popular && <Zap className="ml-2 h-4 w-4" />}
-                      </Button>
-                    </CardContent>
-                  </Card>
+                      )}
+                      <CardHeader>
+                        <div className="flex items-center space-x-3 mb-4">
+                          <div className={`p-3 rounded-lg ${plan.popular
+                              ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white'
+                              : 'bg-purple-500/10 text-purple-500'
+                            }`}>
+                            {plan.icon}
+                          </div>
+                          <CardTitle className="text-2xl">{plan.name}</CardTitle>
+                        </div>
+                        <div className="flex items-baseline">
+                          <span className="text-4xl font-bold">${plan.price}</span>
+                          <span className="text-muted-foreground ml-2">/mo</span>
+                        </div>
+                        <p className="text-muted-foreground mt-2">{plan.description}</p>
+                      </CardHeader>
+                      <CardContent>
+                        <ul className="space-y-4 mb-8">
+                          {plan.features.map((feature, i) => (
+                            <li key={i} className="flex items-center">
+                              <Check className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
+                              <span>{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <Button 
+                          className={`w-full ${plan.popular
+                              ? 'bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600'
+                              : ''
+                            }`}
+                          variant={plan.popular ? 'default' : 'outline'}
+                          onClick={() => handleSubscribe(plan.id)}
+                        >
+                          Get Started
+                          {plan.popular && <Zap className="ml-2 h-4 w-4" />}
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  </div>
                 </motion.div>
               ))}
             </div>

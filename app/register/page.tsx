@@ -11,6 +11,9 @@ import { signUp } from '@/lib/supabase-client';
 import { useTranslation } from '@/lib/i18n';
 import { motion } from 'framer-motion';
 import { Progress } from '@/components/ui/progress';
+import { Checkbox } from "@/components/ui/checkbox";
+import { TermsModal } from '@/components/legal/terms-modal';
+import { PrivacyModal } from '@/components/legal/privacy-modal';
 import Link from 'next/link';
 
 export default function RegisterPage() {
@@ -23,14 +26,18 @@ export default function RegisterPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [touched, setTouched] = useState({ fullName: false, email: false, password: false });
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
 
-  // Prevent hydration mismatch by only rendering after mount
   useEffect(() => {
     setMounted(true);
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!agreedToTerms) {
+      setError('You must agree to the Terms of Service and Privacy Policy');
+      return;
+    }
     setLoading(true);
     setError('');
 
@@ -42,7 +49,6 @@ export default function RegisterPage() {
         return;
       }
 
-      // Redirect to login page after successful registration
       router.push('/login');
     } catch (err: any) {
       setError(err.message || 'Error creating account. Please try again.');
@@ -51,7 +57,6 @@ export default function RegisterPage() {
     }
   };
 
-  // Validation
   const isFullNameValid = fullName.length >= 2;
   const isEmailValid = email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
   const hasLength = password.length >= 8;
@@ -60,7 +65,6 @@ export default function RegisterPage() {
   const hasSpecial = /[^A-Za-z0-9]/.test(password);
   const isPasswordValid = hasLength && hasUpperCase && hasNumber && hasSpecial;
 
-  // Calculate password strength
   const getPasswordStrength = () => {
     let strength = 0;
     if (hasLength) strength += 25;
@@ -77,7 +81,6 @@ export default function RegisterPage() {
     return 'bg-green-500';
   };
 
-  // Prevent hydration issues by not rendering until mounted
   if (!mounted) {
     return null;
   }
@@ -220,6 +223,41 @@ export default function RegisterPage() {
                     </div>
                   </div>
 
+                  <div className="space-y-4">
+                    <div className="flex items-start space-x-2">
+                      <Checkbox
+                        id="terms"
+                        checked={agreedToTerms}
+                        onCheckedChange={(checked) => setAgreedToTerms(checked as boolean)}
+                        className="mt-1"
+                      />
+                      <Label
+                        htmlFor="terms"
+                        className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      >
+                        I agree to the{" "}
+                        <TermsModal
+                          trigger={
+                            <button type="button\" className="text-purple-500 hover:text-purple-600 font-medium underline-offset-4 hover:underline">
+                              Terms of Service
+                            </button>
+                          }
+                        />{" "}
+                        and{" "}
+                        <PrivacyModal
+                          trigger={
+                            <button type="button\" className="text-purple-500 hover:text-purple-600 font-medium underline-offset-4 hover:underline">
+                              Privacy Policy
+                            </button>
+                          }
+                        />
+                      </Label>
+                    </div>
+                    {!agreedToTerms && error && (
+                      <p className="text-xs text-red-500">You must agree to the Terms of Service and Privacy Policy</p>
+                    )}
+                  </div>
+
                   {error && (
                     <motion.div
                       initial={{ opacity: 0, y: -10 }}
@@ -233,7 +271,7 @@ export default function RegisterPage() {
                   <Button
                     type="submit"
                     className="w-full bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 transition-all duration-300"
-                    disabled={loading || !isFullNameValid || !isEmailValid || !isPasswordValid}
+                    disabled={loading || !isFullNameValid || !isEmailValid || !isPasswordValid || !agreedToTerms}
                   >
                     {loading ? (
                       <>
